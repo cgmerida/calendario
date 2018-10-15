@@ -154,11 +154,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Calendario\Providers\AppServiceProvider::class,
+        Calendario\Providers\AuthServiceProvider::class,
+        // Calendario\Providers\BroadcastServiceProvider::class,
+        Calendario\Providers\EventServiceProvider::class,
+        Calendario\Providers\RouteServiceProvider::class,
 
     ],
 

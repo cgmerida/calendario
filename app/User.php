@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace Calendario;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar', 'bio', 'role'
+        'name', 'lastname', 'email', 'username', 'password',
     ];
 
     /**
@@ -24,70 +24,68 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
 
     /*
     |------------------------------------------------------------------------------------
     | Validations
     |------------------------------------------------------------------------------------
-    */
+     */
     public static function rules($update = false, $id = null)
     {
-        $commun = [
-            'email'    => "required|email|unique:users,email,$id",
+        return [
+            'email' => "required|email|unique:users,email,$id",
             'password' => 'nullable|confirmed',
             'avatar' => 'image',
         ];
-
-        if ($update) {
-            return $commun;
-        }
-
-        return array_merge($commun, [
-            'email'    => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
     }
 
     /*
     |------------------------------------------------------------------------------------
     | Attributes
     |------------------------------------------------------------------------------------
-    */
-    public function setPasswordAttribute($value='')
+     */
+    public function setPasswordAttribute($value = '')
     {
         $this->attributes['password'] = bcrypt($value);
     }
-    
-    public function getAvatarAttribute($value)
+
+    public function roles()
     {
-        if (!$value) {
-            return 'http://placehold.it/160x160';
-        }
-    
-        return config('variables.avatar.public').$value;
-    }
-    public function setAvatarAttribute($photo)
-    {
-        $this->attributes['avatar'] = move_file($photo, 'avatar');
+        return $this->belongsToMany(Role::class)->withTimestamps();
     }
 
-    /*
-    |------------------------------------------------------------------------------------
-    | Boot
-    |------------------------------------------------------------------------------------
-    */
-    public static function boot()
+    public function authorizeRoles($roles)
     {
-        parent::boot();
-        static::updating(function($user)
-        {
-            $original = $user->getOriginal();
-            
-            if (\Hash::check('', $user->password)) {
-                $user->attributes['password'] = $original['password'];
+        if ($this->hasAnyRole($roles)) {
+            return true;
+        }
+        abort(401, 'Esta acción no esta autorizada.');
+    }
+
+    private function hasAnyRole($roles)
+    {
+        if (is_array($roles)) {
+            foreach ($roles as $role) {
+                if($this->hasRole($role)){
+                    return true;
+                }
             }
-        });
+        } else {
+            if ($this->hasRole($roles)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function hasRole($role)
+    {
+        if ($this->roles()->where('name', $role)->first()) {
+            return true;
+        }
+
+        return false;
     }
 }

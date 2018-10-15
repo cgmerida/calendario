@@ -16,3 +16,5 @@ Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth', 'Ro
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::view('boot', 'index')->name('miPagina');

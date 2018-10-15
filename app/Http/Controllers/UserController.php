@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Calendario\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Calendario\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
+use Calendario\User;
 
 class UserController extends Controller
 {
