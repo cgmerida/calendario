@@ -1,20 +1,13 @@
 <?php
 
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-Auth::routes();
-
-/*
-|------------------------------------------------------------------------------------
-| Admin
-|------------------------------------------------------------------------------------
-*/
-Route::group(['prefix' => ADMIN, 'as' => ADMIN . '.', 'middleware'=>['auth', 'Role:10']], function () {
-    Route::get('/', 'DashboardController@index')->name('dash');
-    Route::resource('users', 'UserController');
-});
-
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('boot', 'index')->name('miPagina');
+Auth::routes();
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/admin', 'DashboardController@index')->name('admin.dash');
+    Route::resource('users', 'UserController');
+    Route::resource('events', 'EventController');
+});

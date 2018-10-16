@@ -27,18 +27,33 @@ class User extends Authenticatable
         'password',
     ];
 
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
     /*
     |------------------------------------------------------------------------------------
     | Validations
     |------------------------------------------------------------------------------------
      */
-    public static function rules($update = false, $id = null)
+    public static function rules()
     {
-        return [
-            'email' => "required|email|unique:users,email,$id",
-            'password' => 'nullable|confirmed',
-            'avatar' => 'image',
-        ];
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'username' => 'required|string|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
     }
 
     /*
@@ -49,6 +64,11 @@ class User extends Authenticatable
     public function setPasswordAttribute($value = '')
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->name} {$this->lastname}";
     }
 
     public function roles()

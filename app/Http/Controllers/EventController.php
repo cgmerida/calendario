@@ -5,6 +5,8 @@ namespace Calendario\Http\Controllers;
 use Calendario\Event;
 use Illuminate\Http\Request;
 
+use Calendar;
+
 class EventController extends Controller
 {
     /**
@@ -14,7 +16,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::all();
+        return view('events.index', compact('events'));
     }
 
     /**
@@ -24,7 +27,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return view('events.create');
     }
 
     /**
@@ -35,7 +38,11 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, User::rules());
+
+        User::create($request->all());
+
+        return back()->withSuccess(trans('app.success_store'));
     }
 
     /**

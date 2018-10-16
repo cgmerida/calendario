@@ -26,7 +26,7 @@
                 <ul class="dropdown-menu">
                     <li class="pX-20 pY-15 bdB">
                         <i class="ti-bell pR-10"></i>
-                        <span class="fsz-sm fw-600 c-grey-900">Notifications</span>
+                        <span class="fsz-sm fw-600 c-grey-900">Notificaiones</span>
                     </li>
                     <li>
                         <ul class="ovY-a pos-r scrollable lis-n p-0 m-0 fsz-sm">
@@ -184,7 +184,7 @@
             <li class="dropdown">
                 <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
                     <div class="peer mR-10">
-                        <img class="w-2r bdrs-50p" src="{{ auth()->user()->avatar }}" alt="">
+                        <img class="w-2r bdrs-50p" src="{{ asset('images/1.jpg') }}" alt="Avatar">
                     </div>
                     <div class="peer">
                         <span class="fsz-sm c-grey-900">{{ auth()->user()->name }}</span>
@@ -194,26 +194,26 @@
                     <li>
                         <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
                             <i class="ti-settings mR-10"></i>
-                            <span>Setting</span>
+                            <span>Configuración</span>
                         </a>
                     </li>
                     <li>
                         <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
                             <i class="ti-user mR-10"></i>
-                            <span>Profile</span>
+                            <span>Perfil</span>
                         </a>
                     </li>
                     <li>
                         <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
                             <i class="ti-email mR-10"></i>
-                            <span>Messages</span>
+                            <span>Mensajes</span>
                         </a>
                     </li>
                     <li role="separator" class="divider"></li>
                     <li>
                         <a href="/logout" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
                             <i class="ti-power-off mR-10"></i>
-                            <span>Logout</span>
+                            <span>Cerrar Sesión</span>
                         </a>
                     </li>
                 </ul>

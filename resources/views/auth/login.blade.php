@@ -6,20 +6,20 @@
     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
         {{ csrf_field() }}
 
-        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-            <label for="email" class="text-normal text-dark">Email</label>
-            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+            <label for="username" class="text-normal text-dark">Usuario</label>
+            <input class="form-control" name="username" value="{{ old('username') }}" required autofocus>
 
-            @if ($errors->has('email'))
+            @if ($errors->has('username'))
                 <span class="form-text text-danger">
-                    <small>{{ $errors->first('email') }}</small>
+                    <small>{{ $errors->first('username') }}</small>
                 </span>
             @endif
         </div>
 
         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-            <label for="password" class="text-normal text-dark">Password</label>
-            <input id="password" type="password" class="form-control" name="password" required>
+            <label for="password" class="text-normal text-dark">Contraseña</label>
+            <input type="password" class="form-control" name="password" required>
 
             @if ($errors->has('password'))
                 <span class="form-text text-danger">
@@ -34,23 +34,20 @@
                     <div class="checkbox checkbox-circle checkbox-info peers ai-c">
                         <input type="checkbox" id="remember" name="remember" class="peer" {{ old('remember') ? 'checked' : '' }}>
                         <label for="remember" class=" peers peer-greed js-sb ai-c">
-                            <span class="peer peer-greed">Remember Me</span>
+                            <span class="peer peer-greed">Recordarme</span>
                         </label>
                     </div>
                 </div>
                 <div class="peer">
-                    <button class="btn btn-primary">Login</button>
+                    <button class="btn btn-primary">Ingresar</button>
                 </div>
             </div>
         </div>
         <div class="peers ai-c jc-sb fxw-nw">
             <div class="peer">
                 <a class="btn btn-link" href="{{ route('password.request') }}">
-                    Forgot Your Password?
+                    ¿Olvidaste tu contraseña?
                 </a>
-            </div>
-            <div class="peer">
-                <a href="/register" class="btn btn-link">Create new account</a>
             </div>
         </div>
     </form>

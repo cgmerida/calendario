@@ -1,4 +1,4 @@
-@extends('admin.default')
+@extends('admin.master')
 
 @section('page-header')
 	User <small>{{ trans('app.add_new_item') }}</small>
@@ -11,7 +11,7 @@
 		])
 	!!}
 
-		@include('admin.users.form')
+		@include('users.form')
 
 		<button type="submit" class="btn btn-primary">{{ trans('app.add_button') }}</button>
 		

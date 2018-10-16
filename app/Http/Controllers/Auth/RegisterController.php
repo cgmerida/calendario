@@ -6,6 +6,7 @@ use Calendario\User;
 use Calendario\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Calendario\Role;
 
 class RegisterController extends Controller
 {
@@ -49,7 +50,9 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -62,10 +65,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $data['name'],
+            'lastname' => $data['lastname'],
             'email' => $data['email'],
+            'username' => $data['username'],
             'password' => $data['password'],
         ]);
+
+        $user->roles()->attach(Role::where('name', 'user')->first());
+
+        return $user;
+
     }
 }
