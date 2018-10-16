@@ -25,9 +25,9 @@ class Event extends Model
     public static function rules()
     {
         return [
-            'title' => 'requred|max:255',
-            'description' => 'requred',
-            'start' => 'required|date|before:end|after:'.date("Y-m-d", strtotime("-5 day")),
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'start' => 'required|date|before:end|after:-5 day',
             'end' => 'required|date|after:start',
         ];
     }

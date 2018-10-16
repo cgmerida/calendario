@@ -5,9 +5,11 @@
             
             {!! Form::myTextArea('description', 'Descripcion') !!}
 
-            {{ Form::label('start', 'Fecha Inicio') }}
-            {{ Form::date('start', \Carbon\Carbon::now(), ['class' => 'form-control']) }}
+            {!! Form::myDateTimePicker('text', 'start', 'Fecha Inicio', ['id' => 'start']) !!}
 
+            {!! Form::myDateTimePicker('text', 'end', 'Fecha Fin', ['id' => 'end']) !!}
+            
+            {{-- {!! Form::myInput('color', 'color', 'Color') !!} --}}
             
 		</div>  
 	</div>

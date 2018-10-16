@@ -2,10 +2,9 @@
 
 namespace Calendario\Http\Controllers;
 
+use Calendar;
 use Calendario\Event;
 use Illuminate\Http\Request;
-
-use Calendar;
 
 class EventController extends Controller
 {
@@ -38,9 +37,14 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, User::rules());
+        $this->validate($request, Event::rules());
 
-        User::create($request->all());
+        $requestData = $request->all();
+        $requestData['start'] .= ':00';
+        $requestData['end'] .= ':00';
+        $requestData['user_id'] = \Auth::user()->id;
+
+        Event::create($requestData);
 
         return back()->withSuccess(trans('app.success_store'));
     }
@@ -64,7 +68,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        return view('events.edit', compact('event'));
     }
 
     /**
@@ -76,7 +80,15 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        $this->validate($request, Event::rules());
+
+        $requestData = $request->all();
+        $requestData['start'] .= ':00';
+        $requestData['end'] .= ':00';
+
+        $event->update($requestData);
+
+        return redirect()->route('events.index')->withSuccess(trans('app.success_update'));
     }
 
     /**
@@ -87,6 +99,8 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+
+        return back()->withSuccess(trans('app.success_destroy')); 
     }
 }

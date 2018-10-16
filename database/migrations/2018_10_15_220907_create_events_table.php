@@ -19,7 +19,7 @@ class CreateEventsTable extends Migration
             $table->text('description');
             $table->dateTime('start');
             $table->dateTime('end');
-            $table->string('color');
+            $table->string('color')->nullable();
             $table->enum('status', ['Agendado', 'Realizado', 'No Realizado']);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');

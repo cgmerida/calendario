@@ -55,7 +55,8 @@
                                     <a href="{{ route('events.edit', $event) }}"
                                     title="{{ trans('app.edit_title') }}"
                                     class="btn btn-outline-primary btn-sm">
-                                        <span class="ti-pencil"></span></a>
+                                        <span class="ti-pencil"></span>
+                                    </a>
                                 </li>
                                 <li class="list-inline-item">
                                     {!! Form::open([

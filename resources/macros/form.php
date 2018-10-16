@@ -58,3 +58,15 @@ Form::macro('myRange', function ($name, $start, $end, $selected='', $options=[])
         </div>
     ";
 });
+
+Form::macro('myDateTimePicker', function ($type="text", $name, $label="", $options=[], $default = null) {
+    $label = ($label =='') ? '' : html_entity_decode(Form::label($name, $label));
+    return "
+        <div class=form-group>
+            ". $label .
+            "<div class='input-group date'>".
+                Form::input($type, $name, $default, array_merge(["class" => "form-control"], $options)). "
+            </div>
+        </div>
+    ";
+});

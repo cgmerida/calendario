@@ -45,6 +45,7 @@ import './vectorMaps';
 import './chat';
 import './datatable';
 import './datepicker';
+import './datetimepicker';
 import './email';
 import './fullcalendar';
 import './googleMaps';
@@ -52,3 +53,5 @@ import './utils';
 
 import './sweetalert2';
 import './select2';
+
+global.$ = global.jQuery = require('jquery');
