@@ -8,10 +8,10 @@ return [
     "success_destroy" => "¡Eliminación exitosa!",
 
 	// My Views
-    "manage" => "manage",
+    "manage" => "Administración",
     "edit_title" => "Editar Elemento",
     "delete_title" => "Eliminar Elemento",
-    "add_new_item" => "nuevo",
+    "add_new_item" => "Nuevo",
     "update_item" => "actualizar",
 
 	// View buttons
@@ -26,7 +26,5 @@ return [
     "reset_password" => "Recuperar contraseña",
     "reset_password_btn" => "Enviar mensaje de recuperación",
     "connect" => "Iniciar Sesión",
-
-
 
 ];

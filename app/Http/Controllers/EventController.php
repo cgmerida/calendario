@@ -2,7 +2,6 @@
 
 namespace Calendario\Http\Controllers;
 
-use Calendar;
 use Calendario\Event;
 use Illuminate\Http\Request;
 
@@ -42,7 +41,7 @@ class EventController extends Controller
         $requestData = $request->all();
         $requestData['start'] .= ':00';
         $requestData['end'] .= ':00';
-        $requestData['user_id'] = \Auth::user()->id;
+        $requestData['user_id'] = \Auth::id();
 
         Event::create($requestData);
 

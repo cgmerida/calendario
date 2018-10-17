@@ -6,8 +6,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/admin', 'DashboardController@index')->name('admin.dash');
+Route::group(['middleware' => ['web']], function () {
+    Route::view('admin', 'admin.dashboard.index')->name('admin.dash');
     Route::resource('users', 'UserController');
-    Route::resource('events', 'EventController');
+    Route::resource('calendar/events', 'EventController');
+    Route::resource('calendar', 'CalendarController');
+    Route::view('calendario', 'calendar.calendar');
 });

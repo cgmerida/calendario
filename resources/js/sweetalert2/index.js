@@ -1,25 +1,27 @@
-import * as $ from 'jquery';
-import swal from 'sweetalert2';
+import * as $ from "jquery";
+import swal from "sweetalert2";
 
-export default (function () {
-    $(document).on('click', "form.delete button", function(e) {
+window.swal = swal
+
+export default (function() {
+    $(document).on("click", "form.delete button", function(e) {
         var _this = $(this);
         e.preventDefault();
         swal({
-            title: 'Are you sure?', // Opération Dangereuse
-            text: 'Are you sure to continue ?', // Êtes-vous sûr de continuer ?
-            type: 'error',
+            title: "¿Estás Seguro?", // Opération Dangereuse
+            text: "¿Estás seguro de querer continuar?", // Êtes-vous sûr de continuer ?
+            type: "error",
             showCancelButton: true,
-            confirmButtonColor: 'null',
-            cancelButtonColor: 'null',
-            confirmButtonClass: 'btn btn-danger',
-            cancelButtonClass: 'btn btn-primary',
-            confirmButtonText: 'Yeah, sure!', // Oui, sûr
-            cancelButtonText: 'Cancel', // Annuler
+            confirmButtonColor: "null",
+            cancelButtonColor: "null",
+            confirmButtonClass: "btn btn-outline-danger",
+            cancelButtonClass: "btn btn-outline-primary",
+            confirmButtonText: "Si, estoy seguro", // Oui, sûr
+            cancelButtonText: "Cancelar" // Annuler
         }).then(res => {
             if (res.value) {
                 _this.closest("form").submit();
             }
         });
     });
-}())
+})();
