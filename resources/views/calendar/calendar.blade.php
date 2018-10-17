@@ -60,37 +60,40 @@
             $("#crear-evento").click(function(e) {
                 e.preventDefault();
                 var form = $("#crearForm");
+                var myHeaders = new Headers();
+                myHeaders.append('Content-Type', 'application/json');
+                myHeaders.append('X-CSRF-Token', $('input[name="_token"]').val());
 
                 swal({
                     title: "¿Estás seguro de crear el evento?",
                     showLoaderOnConfirm: true,
                     type: 'warning',
                     preConfirm: () => {
-                        return fetch(form.attr("action")+ 'nos', {
-                            headers: {
-                                "X-CSRF-Token": $('input[name="_token"]').val()
-                            },
+                        return fetch(form.attr("action"), {
                             method: form.attr("method"),
-                            credentials: "same-origin",
+                            headers: myHeaders,
                             body: form.serialize()
                         })
                         .then(response => {
                             if (!response.ok) {
-                            throw new Error(response.statusText)
+                                throw new Error(response.statusText)
                             }
                             return response.json()
                         })
                     },
                     allowOutsideClick: () => !swal.isLoading()
                 }).then(result => {
-                    console.log(result);
                     if (result.value) {
                         const respuesta = result.value.message;
-                        swal("¡Realizado!", respuesta, "success");
+                        const status = result.value.status;
+                        if(status === 'bad'){
+                            swal("¡Error en los datos!", respuesta, "error");
+                        } else {
+                            swal("¡Realizado!", respuesta, "success");
+                        }
                     }
                 })
                 .catch(error => {
-                    console.log(error);
                     swal("Hubo un problema!", error.message, "error");
                 });
             });

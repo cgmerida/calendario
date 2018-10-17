@@ -15,11 +15,17 @@ class CalendarController extends Controller
 
     public function store(Request $request)
     {
-        $validate = $this->validate($request, Event::rules());
+        $requestData = $request->all();
+        $requestData['start'] = $requestData['date'] . " " . $requestData['start']->format('H:i:s');
+        $requestData['end'] = $requestData['date'] . " " . $requestData['end']->format('H:i:s');
+        $validator = \Validator::make($requestData, Event::rules());
 
-        $errors = $validate->errors();
-        if($errors){
-            return JSON.parse($errors);
+        $errors = $validator->errors();
+        if ($errors) {
+            return response([
+                'message' => join('<br>', $errors->all()),
+                'status' => 'bad',
+            ]);
         }
 
         Event::create($requestData);
@@ -28,7 +34,6 @@ class CalendarController extends Controller
         return response()->json([
             'message' => 'Se ha creado correctamente',
             'status' => 'ok',
-            'code' => 200
         ]);
     }
 }
