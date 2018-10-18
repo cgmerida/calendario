@@ -1,10 +1,9 @@
 
 {!! Form::open([
-        'route' => 'calendar.store',
-        'method' => 'post',
-        'id' => 'crearForm'
+        'id' => 'calendar-form'
     ])
 !!}
+    @method('PUT')
 
     {!! Form::myInput('text', 'title', 'Titulo') !!}
                 

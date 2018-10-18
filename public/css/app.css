@@ -80365,23 +80365,12 @@ table.dataTable.no-footer {
   border: 1px solid rgba(0, 0, 0, 0.0625);
 }
 
-.fc th {
-  text-align: center;
-  padding: 15px;
-  background-color: transparent;
-  color: #72777a;
-  font-size: 12px;
-  text-transform: uppercase;
-  border-right-width: 0;
-  border-left-width: 0;
-}
-
 .fc button {
   background-color: #fff;
   background-image: none;
   height: 37px;
   padding: 0 15px;
-  color: #595d60;
+  color: #007bff;
 }
 
 .fc button.fc-state-default {
@@ -80396,54 +80385,18 @@ table.dataTable.no-footer {
   background-color: rgba(0, 0, 0, 0.0625);
 }
 
+.fc .fc-day {
+  cursor: pointer;
+}
+
 .fc-toolbar {
-  padding: 20px 20px 0;
-}
-
-.fc-view,
-.fc-view > table {
-  background-color: #fff;
-}
-
-.fc-basic-view td.fc-day-number,
-.fc-basic-view td.fc-week-number span {
-  padding: 7px 15px;
-}
-
-.fc-unthemed .fc-content,
-.fc-unthemed .fc-divider,
-.fc-unthemed .fc-popover,
-.fc-unthemed .fc-row,
-.fc-unthemed tbody,
-.fc-unthemed td,
-.fc-unthemed th,
-.fc-unthemed thead {
-  border-color: rgba(0, 0, 0, 0.0625);
-}
-
-.fc-unthemed .fc-today {
-  background-color: transparent;
-}
-
-.fc-basic-view .fc-day-number.fc-today {
-  background-color: #0f9aee;
-  color: #fff;
-  display: inline-block;
-  float: right;
-  border-radius: 50%;
-  padding: 6px 8px;
-  line-height: 1;
-  margin: 4px 4px 0 0;
+  padding: 0 20px 0;
 }
 
 .fc-event-container .fc-event {
-  border-radius: 0;
-  border: 0;
-  background-color: #e5f4fd;
-  color: #0f9aee !important;
-  font-size: 12px;
-  line-height: 2.5;
-  padding: 0 15px;
+  background-color: #0f9aee;
+  line-height: 1.4;
+  padding: 0 10px;
 }
 
 .fc-event-container .fc-day-grid-event {

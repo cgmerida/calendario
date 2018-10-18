@@ -14,3 +14,12 @@
         <span class="title">Usuarios</span>
     </a>
 </li>
+
+<li class="nav-item">
+    <a class='sidebar-link' href="{{ route('calendar') }}">
+        <span class="icon-holder">
+            <i class="c-brown-500 ti-calendar"></i>
+        </span>
+        <span class="title">Calendario</span>
+    </a>
+</li>

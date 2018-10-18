@@ -6,10 +6,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['web', 'auth']], function () {
     Route::view('admin', 'admin.dashboard.index')->name('admin.dash');
     Route::resource('users', 'UserController');
-    Route::resource('calendar/events', 'EventController');
-    Route::resource('calendar', 'CalendarController');
-    Route::view('calendario', 'calendar.calendar');
+    Route::resource('events', 'EventController');
+    Route::resource('calendar/events', 'CalendarController', ['only' => [
+        'index', 'store', 'update'
+    ]]);
+    Route::view('calendar', 'calendar.calendar')->name('calendar');
 });

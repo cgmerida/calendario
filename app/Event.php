@@ -14,6 +14,10 @@ class Event extends Model
         'status', 'user_id',
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at','deleted_at', 'user_id'
+    ];
+
     protected $dates = [
         'start',
         'end',
@@ -27,7 +31,7 @@ class Event extends Model
         return [
             'title' => 'required|max:255',
             'description' => 'required',
-            'start' => 'required|date|before:end|after:-5 day',
+            'start' => 'required|date|before:end|before:today -5 day',
             'end' => 'required|date|after:start',
         ];
     }

@@ -1,26 +1,28 @@
 @extends('admin.master')
 
-<div class="modal" tabindex="-1" role="dialog" id="crear-modal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">{{ trans('app.add_new_item') }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                @include('calendar.create')
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="crear-evento">Crear</button>
+@section('content')
+
+    <div class="modal" tabindex="-1" role="dialog" id="calendar-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    @include('calendar.form')
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="guardar"></button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@section('content')
+
     <div id="calendar"></div>
 @endsection
  
@@ -28,11 +30,13 @@
     <script>
         $(function(){
             $("#calendar").fullCalendar({
+                themeSystem: 'bootstrap4',
                 events: {
-                    url: "/calendar",
+                    url: "calendar/events",
                     type: "GET",
                     cache: true,
-                    error: function() {
+                    error: function(e) {
+                        console.log(e);
                         alert("Error en la obtención de los eventos!");
                     }
                 },
@@ -49,30 +53,51 @@
                     day: "día"
                 },
                 height: 800,
+                editable: true,
                 dayClick: function(date, jsEvent, view) {
-                    if (view.name === 'month') {
+                    if (view.name === 'month') { 
+                        let form = $("#calendar-form")[0];   
+                        form.action = 'calendar/events';
+
                         $('#date').val(date.format('YYYY-MM-DD'));
-                        $('#crear-modal').modal();
+
+                        $('.modal-title').text('Crear Evento');
+                        $('#guardar').text('Crear');
+                        $('#calendar-modal').modal();
                     }
+                },
+                eventClick: function(calEvent) {
+                    let form = $("#calendar-form")[0];
+                    form.action = 'calendar/events/' + calEvent.id;
+
+                    $('#title').val(calEvent.title);
+                    $('#description').val(calEvent.description);
+                    $('#date').val(calEvent.start.format('YYYY-MM-DD'));
+                    $('#start').val(calEvent.start.format('HH:mm'));
+                    $('#end').val(calEvent.end.format('HH:mm'));
+                    
+                    $('.modal-title').text('Actualizar Evento');
+                    $('#guardar').text('Actualizar');
+                    $('#calendar-modal').modal();
                 }
             });
             
-            $("#crear-evento").click(function(e) {
+            $("#guardar").click(function(e) {
                 e.preventDefault();
-                var form = $("#crearForm");
-                var myHeaders = new Headers();
-                myHeaders.append('Content-Type', 'application/json');
-                myHeaders.append('X-CSRF-Token', $('input[name="_token"]').val());
+                let form = $("#calendar-form")[0];
 
                 swal({
-                    title: "¿Estás seguro de crear el evento?",
+                    title: "¿Estás seguro?",
+                    showCancelButton: true,
                     showLoaderOnConfirm: true,
+                    confirmButtonText: 'Si, ¡Estoy seguro!',
+                    cancelButtonText: 'No, ¡Regresar!',
                     type: 'warning',
                     preConfirm: () => {
-                        return fetch(form.attr("action"), {
-                            method: form.attr("method"),
-                            headers: myHeaders,
-                            body: form.serialize()
+                        return fetch(form.action, {
+                            method: 'POST',
+                            credentials: "same-origin",
+                            body: new FormData(form)
                         })
                         .then(response => {
                             if (!response.ok) {
@@ -86,10 +111,14 @@
                     if (result.value) {
                         const respuesta = result.value.message;
                         const status = result.value.status;
+                        const event = result.value.event;
                         if(status === 'bad'){
-                            swal("¡Error en los datos!", respuesta, "error");
+                            swal("¡Error en los datos!", `<small class=text-danger>${respuesta}</small>`, "error");
                         } else {
                             swal("¡Realizado!", respuesta, "success");
+                            $('#calendar').fullCalendar('removeEvents', event.id);
+                            $('#calendar').fullCalendar('renderEvent', event, true);
+                            $('#calendar-modal').modal('hide');
                         }
                     }
                 })
@@ -98,7 +127,7 @@
                 });
             });
     
-            $('#crear-modal').on('hidden.bs.modal', function (e) {
+            $('#calendar-modal').on('hidden.bs.modal', function (e) {
                 $('form')[0].reset();
             });
         });

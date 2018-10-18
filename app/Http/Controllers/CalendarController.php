@@ -16,24 +16,66 @@ class CalendarController extends Controller
     public function store(Request $request)
     {
         $requestData = $request->all();
-        $requestData['start'] = $requestData['date'] . " " . $requestData['start']->format('H:i:s');
-        $requestData['end'] = $requestData['date'] . " " . $requestData['end']->format('H:i:s');
-        $validator = \Validator::make($requestData, Event::rules());
 
-        $errors = $validator->errors();
-        if ($errors) {
+        $validacion = $this->validacion($requestData);
+        if($validacion){
+            return $validacion;
+        }
+
+        $event = Event::create($requestData);
+
+        return response()->json([
+            'message' => 'Se ha creado correctamente',
+            'event' => $event,
+            'status' => 'ok',
+        ]);
+    }
+
+    public function update(Request $request, Event $event)
+    {
+        $requestData = $request->all();
+
+        $validacion = $this->validacion($requestData);
+        if($validacion){
+            return $validacion;
+        }
+
+        $event->update($requestData);
+
+        return response()->json([
+            'message' => 'Se ha actualizado correctamente',
+            'event' => $event,
+            'status' => 'ok',
+        ]);
+    }
+
+    public function validacion(&$requestData)
+    {
+        if (!$requestData['start'] || !$requestData['end']) {
             return response([
-                'message' => join('<br>', $errors->all()),
+                'message' => 'Ingrese la hora de inicio y la hora de fin',
                 'status' => 'bad',
             ]);
         }
 
-        Event::create($requestData);
+        $requestData['start'] = date("Y-m-d H:i:s", strtotime($requestData['date']
+            . " " . $requestData['start']));
+        $requestData['end'] = date("Y-m-d H:i:s", strtotime($requestData['date']
+            . " " . $requestData['end']));
 
-        // return back()->withSuccess(trans('app.success_store'));
-        return response()->json([
-            'message' => 'Se ha creado correctamente',
-            'status' => 'ok',
-        ]);
+        $requestData['user_id'] = \Auth::id();
+
+        $validator = \Validator::make($requestData, Event::rules());
+
+        $errors = $validator->errors();
+        if ($validator->fails()) {
+            return response([
+                'message' => str_replace(
+                    ['start', 'end'], ['inicio', 'fin'],
+                    join('<br>', $errors->all())
+                ),
+                'status' => 'bad',
+            ]);
+        }
     }
 }
