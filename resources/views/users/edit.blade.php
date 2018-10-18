@@ -1,4 +1,4 @@
-@extends('admin.default')
+@extends('admin.master')
 
 @section('page-header')
 	User <small>{{ trans('app.update_item') }}</small>
@@ -6,13 +6,13 @@
 
 @section('content')
 	{!! Form::model($item, [
-			'action' => ['UserController@update', $item->id],
+			'route' => ['users.update', $item->id],
 			'method' => 'put', 
 			'files' => true
 		])
 	!!}
 
-		@include('admin.users.form')
+		@include('users.form')
 
 		<button type="submit" class="btn btn-primary">{{ trans('app.edit_button') }}</button>
 		

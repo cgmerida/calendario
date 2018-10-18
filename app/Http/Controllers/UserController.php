@@ -66,7 +66,7 @@ class UserController extends Controller
     {
         $item = User::findOrFail($id);
 
-        return view('admin.users.edit', compact('item'));
+        return view('users.edit', compact('item'));
     }
 
     /**
@@ -84,7 +84,7 @@ class UserController extends Controller
 
         $item->update($request->all());
 
-        return redirect()->route(ADMIN . '.users.index')->withSuccess(trans('app.success_update'));
+        return redirect()->route('users.index')->withSuccess(trans('app.success_update'));
     }
 
     /**

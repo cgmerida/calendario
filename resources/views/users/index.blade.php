@@ -43,7 +43,7 @@
                                 <li class="list-inline-item">
                                     {!! Form::open([
                                         'class'=>'delete',
-                                        'url'  => route('users.destroy', $item->id), 
+                                        'route'  => ['users.destroy', $item->id], 
                                         'method' => 'DELETE',
                                         ]) 
                                     !!}
