@@ -4,6 +4,7 @@ namespace Calendario\Http\Controllers;
 
 use Calendario\Event;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class CalendarController extends Controller
 {
@@ -39,7 +40,7 @@ class CalendarController extends Controller
         if($validacion){
             return $validacion;
         }
-
+        
         $event->update($requestData);
 
         return response()->json([
@@ -74,6 +75,25 @@ class CalendarController extends Controller
                     ['start', 'end'], ['inicio', 'fin'],
                     join('<br>', $errors->all())
                 ),
+                'status' => 'bad',
+            ]);
+        }        
+
+        $event_overlap = Event::where('start', '<', $requestData['start'])
+            ->where('end', '>', $requestData['end'])->first();
+
+        if ($event_overlap) {
+            return response()->json([
+                'message' => 'Ya existe un evento en este horario',
+                'status' => 'bad',
+            ]);
+        }
+
+        $diff = Carbon::parse(Carbon::now())->diffInDays($requestData['start']);
+
+        if($diff < 4){
+            return response()->json([
+                'message' => 'El evento debe ser creado con al menos 5 días de anticipación',
                 'status' => 'bad',
             ]);
         }

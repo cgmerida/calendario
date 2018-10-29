@@ -52,12 +52,18 @@
                     week: "semana",
                     day: "día"
                 },
+                eventOverlap: false,
                 height: 800,
                 editable: true,
                 dayClick: function(date, jsEvent, view) {
                     if (view.name === 'month') { 
                         let form = $("#calendar-form")[0];   
                         form.action = 'calendar/events';
+                        
+                        const input = document.querySelector('#calendar-form > input[name=_method]');
+                        if (input) {
+                            input.parentNode.removeChild(input);
+                        }
 
                         $('#date').val(date.format('YYYY-MM-DD'));
 
@@ -69,6 +75,13 @@
                 eventClick: function(calEvent) {
                     let form = $("#calendar-form")[0];
                     form.action = 'calendar/events/' + calEvent.id;
+
+                    const input = document.createElement("input");
+                    input.type = "hidden";
+                    input.name = "_method";
+                    input.value = "PUT";
+
+                    form.appendChild(input);
 
                     $('#title').val(calEvent.title);
                     $('#description').val(calEvent.description);

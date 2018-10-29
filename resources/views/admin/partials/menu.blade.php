@@ -9,7 +9,7 @@
 <li class="nav-item">
     <a class='sidebar-link' href="{{ route('users.index') }}">
         <span class="icon-holder">
-            <i class="c-brown-500 ti-user"></i>
+            <i class="c-red-500 ti-user"></i>
         </span>
         <span class="title">Usuarios</span>
     </a>
@@ -18,7 +18,7 @@
 <li class="nav-item">
     <a class='sidebar-link' href="{{ route('calendar') }}">
         <span class="icon-holder">
-            <i class="c-brown-500 ti-calendar"></i>
+            <i class="c-green-500 ti-calendar"></i>
         </span>
         <span class="title">Calendario</span>
     </a>

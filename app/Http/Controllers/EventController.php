@@ -36,12 +36,9 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, Event::rules());
-
         $requestData = $request->all();
-        $requestData['start'] .= ':00';
-        $requestData['end'] .= ':00';
-        $requestData['user_id'] = \Auth::id();
+
+        $validacion = $this->validacion($requestData);
 
         Event::create($requestData);
 
@@ -79,12 +76,10 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        $this->validate($request, Event::rules());
-
         $requestData = $request->all();
-        $requestData['start'] .= ':00';
-        $requestData['end'] .= ':00';
 
+        $validacion = $this->validacion($requestData);
+        
         $event->update($requestData);
 
         return redirect()->route('events.index')->withSuccess(trans('app.success_update'));
@@ -100,6 +95,23 @@ class EventController extends Controller
     {
         $event->delete();
 
-        return back()->withSuccess(trans('app.success_destroy')); 
+        return back()->withSuccess(trans('app.success_destroy'));
+    }
+
+    private function validacion(&$requestData)
+    {
+        $this->validate($request, Event::rules());
+
+        $requestData = $request->all();
+        $requestData['start'] .= ':00';
+        $requestData['end'] .= ':00';
+        $requestData['user_id'] = \Auth::id();
+
+        $event_overlap = Event::where('start', '<', $requestData['start'])
+            ->where('end', '>', $requestData['end'])->first();
+
+        if ($event_overlap) {
+            return back()->withErrors(['start' => 'Ya existe un evento en este horario'])->withInput();
+        }  
     }
 }

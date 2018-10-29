@@ -31,8 +31,9 @@ class Event extends Model
         return [
             'title' => 'required|max:255',
             'description' => 'required',
-            'start' => 'required|date|before:end|before:today -5 day',
+            'start' => 'required|date|before:end|after_or_equal:today',
             'end' => 'required|date|after:start',
         ];
     }
+    
 }

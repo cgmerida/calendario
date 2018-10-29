@@ -3,8 +3,6 @@
         'id' => 'calendar-form'
     ])
 !!}
-    @method('PUT')
-
     {!! Form::myInput('text', 'title', 'Titulo') !!}
                 
     {!! Form::myTextArea('description', 'Descripcion') !!}
