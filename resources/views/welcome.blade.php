@@ -1,96 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+<head>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Landing page of Calendar RN">
+    <meta name="author" content="Gerardo Merida">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
+    <title>Calendario RN</title>
+
+    <!-- Styles -->
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+
+    <style>
+        @media screen and (max-width: 992px) {
+            .masthead h1 {
+                font-size: 5.5rem;
             }
+        }
 
-            .full-height {
-                height: 100vh;
-            }
+        .masthead {
+            min-height: 30rem;
+            position: relative;
+            display: table;
+            width: 100%;
+            height: 100vh;
+            padding-top: 8rem;
+            padding-bottom: 8rem;
+            background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, .1)), to(rgba(255, 255, 255, .1))),
+            url('{{ asset("/images/arte.jpg") }}');
+            background: linear-gradient(90deg,
+            rgba(255, 255, 255, .1) 0,
+            rgba(255, 255, 255, .1) 100%),
+            url('{{ asset("/images/arte.jpg") }}');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: #212529;
+        }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+        .masthead h1 {
+            font-size: 4rem;
+            margin: 0;
+            padding: 0;
+        }
 
-            .position-ref {
-                position: relative;
-            }
+        .btn {
+            -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .1);
+            box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .1);
+            font-weight: 700;
+        }
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+        .btn-primary {
+            background-color: #1d809f!important;
+            border-color: #1d809f!important;
+            color: #fff!important;
+        }
 
-            .content {
-                text-align: center;
-            }
+        .btn-xl {
+            padding: 1.25rem 2.5rem;
+        }
+    </style>
 
-            .title {
-                font-size: 84px;
-            }
+</head>
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+<body>
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
+    <div class="masthead d-flex">
+        <div class="container text-center my-auto fw-900">
+            <h1 class="mb-1">Calendario RN</h1>
+            <h3 class="mb-5">
+                <em>Un sistema de organización municipal</em>
+            </h3>
+            @auth
+            <a class="btn btn-primary btn-xl js-scroll-trigger" href="/admin">Inicio</a> @else
+            <a class="btn btn-primary btn-xl js-scroll-trigger" href="/login">Iniciar Sesión</a> @endauth
         </div>
-    </body>
+    </div>
+
+    <script src="{{ mix('/js/app.js') }}"></script>
+
+</body>
+
 </html>

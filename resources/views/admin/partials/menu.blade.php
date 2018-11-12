@@ -15,6 +15,17 @@
     </a>
 </li>
 
+@if (Auth::user()->hasRole('admin'))
+    <li class="nav-item">
+        <a class='sidebar-link' href="{{ route('events.index') }}">
+            <span class="icon-holder">
+                <i class="c-white-500 ti-bookmark"></i>
+            </span>
+            <span class="title">Eventos</span>
+        </a>
+    </li>
+@endif
+
 <li class="nav-item">
     <a class='sidebar-link' href="{{ route('calendar') }}">
         <span class="icon-holder">

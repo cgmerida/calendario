@@ -35,10 +35,17 @@
                     </li>
                     <li role="separator" class="divider"></li>
                     <li>
-                        <a href="/logout" class="d-b td-n pY-5 bgcH-grey-100 c-red-500">
+                        <a class="d-b td-n pY-5 bgcH-grey-100 c-red-500" 
+                        href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
                             <i class="ti-power-off mR-10"></i>
                             <span>Cerrar Sesión</span>
                         </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </li>
                 </ul>
             </li>

@@ -1,13 +1,22 @@
 table {
   &.dataTable {
+    th {
+      cursor: pointer;
+    }
     &.no-footer {
       border-bottom: 1px solid $border-color;
       margin-bottom: 20px;
     }
   }
 }
-
+.sorting_desc {
+  background: url('/images/datatables/sort_desc.png') no-repeat right center;
+}
+.sorting {
+  background: url('/images/datatables/sort_both.png') no-repeat right center;
+}
 .sorting_asc {
+  background: url('/images/datatables/sort_asc.png') no-repeat right center;
   &:focus {
     outline: none;
   }
