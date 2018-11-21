@@ -5,9 +5,9 @@
             
             {!! Form::myTextArea('description', 'Descripcion') !!}
 
-            {!! Form::myDateTimePicker('text', 'start', 'Fecha Inicio', ['id' => 'start']) !!}
+            {!! Form::datePicker('start', 'Fecha Inicio', ['id' => 'start']) !!}
 
-            {!! Form::myDateTimePicker('text', 'end', 'Fecha Fin', ['id' => 'end']) !!}
+            {!! Form::datePicker('end', 'Fecha Fin', ['id' => 'end']) !!}
             
             {{-- {!! Form::myInput('color', 'color', 'Color') !!} --}}
             

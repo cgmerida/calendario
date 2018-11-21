@@ -2,12 +2,22 @@
 
 namespace Calendario\Http\Controllers;
 
-use Calendario\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Caffeinated\Shinobi\Models\Role;
 use Calendario\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:users.index')->only('index');
+        $this->middleware('permission:users.create')->only(['create', 'store']);
+        $this->middleware('permission:users.edit')->only(['edit', 'update']);
+        $this->middleware('permission:users.show')->only('show');
+        $this->middleware('permission:users.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,9 +25,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $items = User::latest('updated_at')->get();
-
-        return view('users.index', compact('items'));
+        return view('users.index');
     }
 
     /**
@@ -27,7 +35,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::all(['id', 'name', 'description']);
+
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -39,8 +49,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, User::rules());
-        
-        User::create($request->all());
+
+        $user = User::create($request->all());
+
+        $user->roles()->sync($request->roles);
 
         return back()->withSuccess(trans('app.success_store'));
     }
@@ -62,11 +74,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $item = User::findOrFail($id);
-
-        return view('users.edit', compact('item'));
+        $roles = Role::all(['id', 'name', 'description']);
+        return view('users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -76,13 +87,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $this->validate($request, User::rules(true, $id));
+        $this->validate($request, User::rules(true, $user->id));
 
-        $item = User::findOrFail($id);
+        $user->update($request->all());
 
-        $item->update($request->all());
+        $user->roles()->sync($request->roles);
 
         return redirect()->route('users.index')->withSuccess(trans('app.success_update'));
     }
@@ -93,11 +104,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        User::destroy($id);
+        $user->delete($id);
 
-        return back()->withSuccess(trans('app.success_destroy')); 
+        return back()->withSuccess(trans('app.success_destroy'));
     }
 }
-

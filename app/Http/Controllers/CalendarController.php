@@ -93,8 +93,6 @@ class CalendarController extends Controller
         }
 
         // Valida que los eventos no se sobre pongan
-        // $event_overlap = Event::whereBetween('start', '<', $requestData['start'])
-        //     ->where('end', '>', $requestData['end'])->first();
         $event_overlap = Event::whereRaw('? between start and end', [$requestData['start']])
             ->orWhereRaw('? between start and end', [$requestData['end']])->count();
 

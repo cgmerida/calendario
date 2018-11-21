@@ -1,7 +1,11 @@
 @extends('admin.master')
 
+@section('css')
+    @include('admin.partials.datatables')
+@endsection
+
 @section('page-header')
-    Eventos <small>(Administración)</small>
+    Eventos <small>{{ trans('app.manage') }}</small>
 @endsection
 
 @section('content')
@@ -36,50 +40,23 @@
                     <th>Acciones</th>
                 </tr>
             </tfoot>
-            
-            <tbody>
-                @foreach ($events as $event)
-                    <tr>
-                        <td>
-                            <a href="{{ route('events.edit', $event) }}">
-                                {{ $event->title }}
-                            </a>
-                        </td>
-                        <td>{{ $event->description }}</td>
-                        <td>{{ $event->start->format('d/m/Y H:i:s') }}</td>
-                        <td>{{ $event->end->format('d/m/Y H:i:s') }}</td>
-                        <td>{{ $event->status }}</td>
-                        <td>
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <a href="{{ route('events.edit', $event) }}"
-                                    title="{{ trans('app.edit_title') }}"
-                                    class="btn btn-outline-primary btn-sm">
-                                        <span class="ti-pencil"></span>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    {!! Form::open([
-                                        'class'=>'delete',
-                                        'url'  => route('events.destroy', $event), 
-                                        'method' => 'DELETE',
-                                        ]) 
-                                    !!}
-
-                                        <button class="btn btn-outline-danger btn-sm"
-                                        title="{{ trans('app.delete_title') }}">
-                                            <i class="ti-trash"></i>
-                                        </button>
-                                        
-                                    {!! Form::close() !!}
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        
         </table>
     </div>
 
+@endsection
+
+@section('js')
+    <script>
+        $('#dataTable').DataTable({
+            ajax: '/api/events',
+            columns: [
+                {data: 'title'},
+                {data: 'description'},
+                {data: 'start'},
+                {data: 'end'},
+                {data: 'status'},
+                {data: 'btn'}
+            ]
+        });
+    </script>
 @endsection

@@ -6,6 +6,8 @@
         <span class="title">Dashboard</span>
     </a>
 </li>
+
+@can('user.index')
 <li class="nav-item">
     <a class='sidebar-link' href="{{ route('users.index') }}">
         <span class="icon-holder">
@@ -14,17 +16,19 @@
         <span class="title">Usuarios</span>
     </a>
 </li>
+@endcan
 
-@if (Auth::user()->hasRole('admin'))
-    <li class="nav-item">
-        <a class='sidebar-link' href="{{ route('events.index') }}">
-            <span class="icon-holder">
-                <i class="c-white-500 ti-bookmark"></i>
-            </span>
-            <span class="title">Eventos</span>
-        </a>
-    </li>
-@endif
+
+@can('events.index')
+<li class="nav-item">
+    <a class='sidebar-link' href="{{ route('events.index') }}">
+        <span class="icon-holder">
+            <i class="c-white-500 ti-bookmark"></i>
+        </span>
+        <span class="title">Eventos</span>
+    </a>
+</li>
+@endcan
 
 <li class="nav-item">
     <a class='sidebar-link' href="{{ route('calendar') }}">

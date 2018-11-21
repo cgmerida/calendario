@@ -4,10 +4,11 @@ namespace Calendario;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Caffeinated\Shinobi\Traits\ShinobiTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, ShinobiTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -45,15 +46,25 @@ class User extends Authenticatable
     | Validations
     |------------------------------------------------------------------------------------
      */
-    public static function rules()
+    public static function rules($update = false, $id = null)
     {
-        return [
+        $commun = [
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'username' => 'required|string|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'email' => "required|string|email|max:255|unique:users,email,$id",
+            'username' => "required|string|max:255|unique:users,username,$id",
+            'password' => 'nullable|confirmed',
         ];
+
+        if ($update) {
+            return $commun;
+        }
+        
+        return array_merge($commun, [
+            'email'    => 'required|email|max:255|unique:users',
+            'username' => 'required|string|max:255|unique:users',
+            'password' => 'required|confirmed|min:6',
+        ]);
     }
 
     /*
@@ -69,43 +80,5 @@ class User extends Authenticatable
     public function getFullNameAttribute()
     {
         return "{$this->name} {$this->lastname}";
-    }
-
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class)->withTimestamps();
-    }
-
-    public function authorizeRoles($roles)
-    {
-        if ($this->hasAnyRole($roles)) {
-            return true;
-        }
-        abort(401, 'Esta acción no esta autorizada.');
-    }
-
-    private function hasAnyRole($roles)
-    {
-        if (is_array($roles)) {
-            foreach ($roles as $role) {
-                if($this->hasRole($role)){
-                    return true;
-                }
-            }
-        } else {
-            if ($this->hasRole($roles)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function hasRole($role)
-    {
-        if ($this->roles()->where('name', $role)->first()) {
-            return true;
-        }
-
-        return false;
     }
 }

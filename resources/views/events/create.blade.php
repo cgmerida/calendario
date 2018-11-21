@@ -6,7 +6,8 @@
 
 @section('content')
 	{!! Form::open([
-			'route' => 'events.store'
+			'route' => 'events.store',
+			'autocomplete' => 'off'
 		])
 	!!}
 
@@ -14,28 +15,26 @@
 
 		<button type="submit" class="btn btn-primary">{{ trans('app.add_button') }}</button>
 		
+		@include('admin.partials.back')
+		
 	{!! Form::close() !!}
 
 @stop
 
 @section('js')
 	<script>
-			$(function(){
+		$(function(){
+			
+				let currentDate = new Date();
+				currentDate.setDate(currentDate.getDate() + 5);
 				$('#start').datetimepicker({
-					useCurrent: false,
-					format: 'YYYY-MM-DD HH:mm',
-					locale: 'es',
-					sideBySide: true,
-					daysOfWeekDisabled: [1]
+					minDate: currentDate
 				});
 
 				$('#end').datetimepicker({
-					useCurrent: false,
-					format: 'YYYY-MM-DD HH:mm',
-					locale: 'es',
-					sideBySide: true,
-					daysOfWeekDisabled: [1]
+					minDate: currentDate
 				});
+				
 				$("#start").on("dp.change", function (e) {
 					$('#end').data("DateTimePicker").minDate(e.date);
 				});

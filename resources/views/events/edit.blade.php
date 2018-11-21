@@ -7,7 +7,8 @@
 @section('content')
 	{!! Form::model($event, [
 			'route' => ['events.update', $event],
-			'method' => 'put'
+			'method' => 'put',
+			'autocomplete' => 'off'
 		])
 	!!}
 
@@ -15,29 +16,24 @@
 
 		<button type="submit" class="btn btn-primary">{{ trans('app.edit_button') }}</button>
 		
+		@include('admin.partials.back')
+		
 	{!! Form::close() !!}
 	
 @stop
 
 @section('js')
 	<script>
-			$(function(){
-				$('#start').datetimepicker({
-					useCurrent: false,
-					format: 'YYYY-MM-DD HH:mm',
-					locale: 'es',
-					sideBySide: true,
-					daysOfWeekDisabled: [1]
-				});
+		$(function(){
+			
+				let currentDate = new Date();
+				currentDate.setDate(currentDate.getDate() + 5);
+				$('#start').datetimepicker();
 
-				$('#end').datetimepicker({
-					useCurrent: false,
-					format: 'YYYY-MM-DD HH:mm',
-					locale: 'es',
-					sideBySide: true,
-					daysOfWeekDisabled: [1]
-				});
+				$('#end').datetimepicker();
+				
 				$("#start").on("dp.change", function (e) {
+					$('#start').data("DateTimePicker").minDate(currentDate);
 					$('#end').data("DateTimePicker").minDate(e.date);
 				});
 				$("#end").on("dp.change", function (e) {

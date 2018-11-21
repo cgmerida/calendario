@@ -1,7 +1,11 @@
 @extends('admin.master')
 
+@section('css')
+    @include('admin.partials.datatables')
+@endsection
+
 @section('page-header')
-    Users <small>{{ trans('app.manage') }}</small>
+    Usuarios <small>{{ trans('app.manage') }}</small>
 @endsection
 
 @section('content')
@@ -17,48 +21,37 @@
         <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Actions</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             
             <tfoot>
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Actions</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
                 </tr>
             </tfoot>
-            
-            <tbody>
-                @foreach ($items as $item)
-                    <tr>
-                        <td><a href="{{ route('users.edit', $item->id) }}">{{ $item->name }}</a></td>
-                        <td>{{ $item->email }}</td>
-                        <td>
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <a href="{{ route('users.edit', $item->id) }}" title="{{ trans('app.edit_title') }}" class="btn btn-primary btn-sm"><span class="ti-pencil"></span></a></li>
-                                <li class="list-inline-item">
-                                    {!! Form::open([
-                                        'class'=>'delete',
-                                        'route'  => ['users.destroy', $item->id], 
-                                        'method' => 'DELETE',
-                                        ]) 
-                                    !!}
-
-                                        <button class="btn btn-danger btn-sm" title="{{ trans('app.delete_title') }}"><i class="ti-trash"></i></button>
-                                        
-                                    {!! Form::close() !!}
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
         
         </table>
     </div>
 
+@endsection
+
+@section('js')
+    <script>
+        $('#dataTable').DataTable({
+            ajax: '/api/users',
+            columns: [
+                {data: 'name'},
+                {data: 'lastname'},
+                {data: 'email'},
+                {data: 'btn'}
+            ]
+        });
+    </script>
 @endsection

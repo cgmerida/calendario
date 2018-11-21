@@ -11,6 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //Creacion de todos los permisos
+        $this->call(PermissionTableSeeder::class);
+
         // La creación de datos de roles debe ejecutarse primero
         $this->call(RoleTableSeeder::class);
         
