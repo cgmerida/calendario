@@ -25,9 +25,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
-
-        return view('roles.index', compact('roles'));
+        return view('roles.index');
     }
 
     /**
@@ -65,7 +63,8 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        return view('roles.show', compact('role'));
+        $permissions = Permission::all();
+        return view('roles.show', compact('role', 'permissions'));
     }
 
     /**
@@ -76,7 +75,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        $permissions = Permission::all(['id', 'name', 'description']);
+        $permissions = Permission::all();
         return view('roles.edit', compact('role', 'permissions'));
     }
 
@@ -93,7 +92,7 @@ class RoleController extends Controller
 
         $role->permissions()->sync($request->permissions);
 
-        return redirect()->route('users.index')->withSuccess(__('app.success_update'));
+        return redirect()->route('roles.index')->withSuccess(__('app.success_update'));
     }
 
     /**
