@@ -16,9 +16,11 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::view('admin', 'admin.dashboard.index')->name('admin.dash');
+    Route::resource('roles', 'RoleController');
     Route::resource('users', 'UserController');
     Route::resource('events', 'EventController');
+    
+    Route::view('admin', 'admin.dashboard.index')->name('admin.dash');
 
     Route::group(['prefix' => 'calendar', 'as' => 'calendar.'], function () {
         Route::resource('events', 'CalendarController', ['except' => [

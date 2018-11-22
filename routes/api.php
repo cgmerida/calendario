@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,22 +18,31 @@ use Carbon\Carbon;
 //     return $request->user();
 // });
 
-Route::get('events', function () {
-    return datatables(Calendario\Event::all())
-        ->addColumn('btn', 'events.actions')
-        ->editColumn('start', function ($events) {
-            return $events->start ? with(new Carbon($events->start))->format('d/m/Y H:i:s') : '';
-        })
-        ->editColumn('end', function ($events) {
-            return $events->end ? with(new Carbon($events->end))->format('d/m/Y H:i:s') : '';
-        })
-        ->rawColumns(['btn'])
-        ->make(true);
-});
+Route::group(['middleware' => ['web']], function () {
+    Route::get('roles', function () {
+        return datatables(Caffeinated\Shinobi\Models\Role::latest('updated_at')->get())
+            ->addColumn('actions', 'roles.partials.actions')
+            ->rawColumns(['actions'])
+            ->toJson();
+    });
 
-Route::get('users', function () {
-    return datatables(Calendario\User::latest('updated_at')->get())
-        ->addColumn('btn', 'users.partials.actions')
-        ->rawColumns(['btn'])
-        ->toJson();
+    Route::get('users', function () {
+        return datatables(Calendario\User::latest('updated_at')->get())
+            ->addColumn('actions', 'users.partials.actions')
+            ->rawColumns(['actions'])
+            ->toJson();
+    });
+
+    Route::get('events', function () {
+        return datatables(Calendario\Event::all())
+            ->addColumn('actions', 'events.partials.actions')
+            ->editColumn('start', function ($events) {
+                return $events->start ? with(new Carbon($events->start))->format('d/m/Y H:i:s') : '';
+            })
+            ->editColumn('end', function ($events) {
+                return $events->end ? with(new Carbon($events->end))->format('d/m/Y H:i:s') : '';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+    });
 });
