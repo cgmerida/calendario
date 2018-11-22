@@ -7,7 +7,19 @@
     </a>
 </li>
 
-@can('user.index')
+@can('roles.index')
+<li class="nav-item">
+    <a class='sidebar-link' href="{{ route('roles.index') }}">
+        <span class="icon-holder">
+            <i class="c-purple-500 ti-id-badge"></i>
+        </span>
+        <span class="title">Roles</span>
+    </a>
+</li>
+@endcan
+
+
+@can('users.index')
 <li class="nav-item">
     <a class='sidebar-link' href="{{ route('users.index') }}">
         <span class="icon-holder">

@@ -55,7 +55,7 @@
                 {data: 'start'},
                 {data: 'end'},
                 {data: 'status'},
-                {data: 'btn'}
+                {data: 'actions'}
             ]
         });
     </script>

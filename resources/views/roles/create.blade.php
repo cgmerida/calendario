@@ -1,20 +1,22 @@
 @extends('admin.master')
 
 @section('page-header')
-	Usuario <small>{{ trans('app.add_new_item') }}</small>
+	Rol <small>{{ trans('app.add_new_item') }}</small>
 @stop
 
 @section('content')
 	{!! Form::open([
-			'route' => 'users.store',
+			'route' => 'roles.store',
 			'files' => true
 		])
 	!!}
 
-		@include('users.partials.form')
+		@include('roles.partials.form')
 
 		<button type="submit" class="btn btn-primary">{{ trans('app.add_button') }}</button>
 		
 	{!! Form::close() !!}
 	
 @stop
+
+@include('roles.partials.js')

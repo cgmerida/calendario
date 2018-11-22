@@ -5,14 +5,14 @@
 @endsection
 
 @section('page-header')
-    Usuarios <small>{{ trans('app.manage') }}</small>
+    Roles <small>{{ trans('app.manage') }}</small>
 @endsection
 
 @section('content')
 
-    @can('users.create')
+    @can('roles.create')
         <div class="mB-20">
-            <a href="{{ route('users.create') }}" class="btn btn-info">
+            <a href="{{ route('roles.create') }}" class="btn btn-info">
                 {{ trans('app.add_button') }}
             </a>
         </div>
@@ -23,8 +23,7 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Correo</th>
+                    <th>Descripción</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -32,8 +31,7 @@
             <tfoot>
                 <tr>
                     <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Correo</th>
+                    <th>Descripción</th>
                     <th>Acciones</th>
                 </tr>
             </tfoot>
@@ -46,11 +44,10 @@
 @section('js')
     <script>
         $('#dataTable').DataTable({
-            ajax: '/api/users',
+            ajax: '/api/roles',
             columns: [
                 {data: 'name'},
-                {data: 'lastname'},
-                {data: 'email'},
+                {data: 'description'},
                 {data: 'actions'}
             ]
         });

@@ -12,7 +12,7 @@
 		])
 	!!}
 
-		@include('events.form')
+		@include('events.partials.form')
 
 		<button type="submit" class="btn btn-primary">{{ trans('app.edit_button') }}</button>
 		
