@@ -30,8 +30,6 @@
   .header-container {
     @include clearfix;
 
-    height: $header-height;
-
     .nav-left,
     .nav-right {
       list-style: none;

@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:events.index')->only('index');
+        $this->middleware('permission:events.create')->only(['create', 'store']);
+        $this->middleware('permission:events.edit')->only(['edit', 'update']);
+        $this->middleware('permission:events.show')->only('show');
+        $this->middleware('permission:events.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,6 @@ class EventController extends Controller
      */
     public function index()
     {
-        // $events = Event::all();
         return view('events.index');
     }
 
@@ -79,7 +88,7 @@ class EventController extends Controller
         $requestData = $request->all();
 
         $validacion = $this->validacion($requestData);
-        
+
         $event->update($requestData);
 
         return redirect()->route('events.index')->withSuccess(trans('app.success_update'));
@@ -112,6 +121,6 @@ class EventController extends Controller
 
         if ($event_overlap) {
             return back()->withErrors(['start' => 'Ya existe un evento en este horario'])->withInput();
-        }  
+        }
     }
 }
