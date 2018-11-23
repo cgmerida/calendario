@@ -80294,19 +80294,19 @@ table.dataTable.no-footer {
   margin-bottom: 20px;
 }
 
-.sorting_desc {
+table.dataTable .sorting_desc {
   background: url("/images/datatables/sort_desc.png") no-repeat right center;
 }
 
-.sorting {
+table.dataTable .sorting {
   background: url("/images/datatables/sort_both.png") no-repeat right center;
 }
 
-.sorting_asc {
+table.dataTable .sorting_asc {
   background: url("/images/datatables/sort_asc.png") no-repeat right center;
 }
 
-.sorting_asc:focus {
+table.dataTable .sorting_asc:focus {
   outline: none;
 }
 
@@ -80329,7 +80329,7 @@ table.dataTable.no-footer {
 }
 
 .dataTables_wrapper .dataTables_length select {
-  border: 1px solid rgba(0, 0, 0, 0.0625);
+  border: 3px solid rgba(0, 0, 0, 0.0625);
   border-radius: 2px;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -80376,16 +80376,16 @@ table.dataTable.no-footer {
 .dataTables_wrapper .dataTables_processing {
   color: #313435;
   position: absolute;
-  top: 30%;
+  top: 45%;
   left: 50%;
   width: 100%;
-  height: 60px;
+  height: 75px;
   margin-left: -50%;
   margin-top: -25px;
   padding-top: 20px;
   text-align: center;
   font-size: 1.2em;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .dataTables_wrapper .dataTables_paginate {
@@ -80669,10 +80669,5 @@ img {
   padding: 10px 15px;
   border: none;
   background: none;
-}
-
-#dataTable tr th:last-of-type {
-  min-width: 95px;
-  max-width: 115px;
 }
 

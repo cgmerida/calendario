@@ -24,6 +24,10 @@ $.extend($.fn.dataTable.defaults, {
     serverSide: true,
     processing: true,
     stateSave: true,
+    fixedColumns: true,
+    columnDefs: [
+        { width: 200, targets: -1 }
+    ],
     buttons: [
         {
             extend: "copy",
