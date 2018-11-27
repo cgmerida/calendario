@@ -46,6 +46,14 @@ $.extend($.fn.dataTable.defaults, {
         }
     ],
     language: {
-        url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+        url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+        
+        buttons: {
+            copyTitle: 'Copiado en el portapapeles',
+            copySuccess: {
+                _: '%d lineas copiadas',
+                1: '1 línea copiada'
+            }
+        }
     }
 });
