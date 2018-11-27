@@ -14,8 +14,12 @@ class DatabaseSeeder extends Seeder
         //Creacion de todos los permisos
         $this->call(PermissionTableSeeder::class);
 
+        //Creacion de todas las contingencias
+        $this->call(ContingencyTableSeeder::class);
+
         // La creación de datos de roles debe ejecutarse primero
         $this->call(RoleTableSeeder::class);
+        
         
         // Los usuarios necesitarán los roles previamente generados
         $this->call(UserTableSeeder::class);

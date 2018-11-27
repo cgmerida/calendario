@@ -18,6 +18,16 @@
 </li>
 @endcan
 
+@can('contingencies.index')
+<li class="nav-item">
+    <a class='sidebar-link' href="{{ route('contingencies.index') }}">
+        <span class="icon-holder">
+            <i class="c-brown-700 ti-alert"></i>
+        </span>
+        <span class="title">Contingencias</span>
+    </a>
+</li>
+@endcan
 
 @can('users.index')
 <li class="nav-item">

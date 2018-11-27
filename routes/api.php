@@ -18,31 +18,36 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::group(['middleware' => ['web']], function () {
-    Route::get('roles', function () {
-        return datatables(Caffeinated\Shinobi\Models\Role::latest('updated_at')->get())
-            ->addColumn('actions', 'roles.partials.actions')
-            ->rawColumns(['actions'])
-            ->toJson();
-    });
+Route::get('roles', function () {
+    return datatables(Caffeinated\Shinobi\Models\Role::latest('updated_at')->get())
+        ->addColumn('actions', 'roles.partials.actions')
+        ->rawColumns(['actions'])
+        ->toJson();
+});
 
-    Route::get('users', function () {
-        return datatables(Calendario\User::latest('updated_at')->get())
-            ->addColumn('actions', 'users.partials.actions')
-            ->rawColumns(['actions'])
-            ->toJson();
-    });
+Route::get('contingencies', function () {
+    return datatables(Calendario\Contingency::latest('updated_at')->get())
+        ->addColumn('actions', 'contingencies.partials.actions')
+        ->rawColumns(['actions'])
+        ->toJson();
+});
 
-    Route::get('events', function () {
-        return datatables(Calendario\Event::all())
-            ->addColumn('actions', 'events.partials.actions')
-            ->editColumn('start', function ($events) {
-                return $events->start ? with(new Carbon($events->start))->format('d/m/Y H:i:s') : '';
-            })
-            ->editColumn('end', function ($events) {
-                return $events->end ? with(new Carbon($events->end))->format('d/m/Y H:i:s') : '';
-            })
-            ->rawColumns(['actions'])
-            ->make(true);
-    });
+Route::get('users', function () {
+    return datatables(Calendario\User::latest('updated_at')->get())
+        ->addColumn('actions', 'users.partials.actions')
+        ->rawColumns(['actions'])
+        ->toJson();
+});
+
+Route::get('events', function () {
+    return datatables(Calendario\Event::all())
+        ->addColumn('actions', 'events.partials.actions')
+        ->editColumn('start', function ($events) {
+            return $events->start ? with(new Carbon($events->start))->format('d/m/Y H:i:s') : '';
+        })
+        ->editColumn('end', function ($events) {
+            return $events->end ? with(new Carbon($events->end))->format('d/m/Y H:i:s') : '';
+        })
+        ->rawColumns(['actions'])
+        ->make(true);
 });
