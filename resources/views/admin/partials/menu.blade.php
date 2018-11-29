@@ -29,6 +29,17 @@
 </li>
 @endcan
 
+@can('colonies.index')
+<li class="nav-item">
+    <a class='sidebar-link' href="{{ route('colonies.index') }}">
+        <span class="icon-holder">
+            <i class="c-blue-900 ti-pin"></i>
+        </span>
+        <span class="title">Colonias</span>
+    </a>
+</li>
+@endcan
+
 @can('users.index')
 <li class="nav-item">
     <a class='sidebar-link' href="{{ route('users.index') }}">

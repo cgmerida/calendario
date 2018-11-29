@@ -17,8 +17,8 @@ class CreateColoniesTable extends Migration
             $table->increments('id');
             $table->string('colony');
             $table->integer('zone')->unsigned();
-            $table->double('lat', 12, 8);
-            $table->double('lng', 12, 8);
+            $table->double('lat', 12, 8)->nullable();
+            $table->double('lng', 12, 8)->nullable();
             $table->timestamps();
         });
     }

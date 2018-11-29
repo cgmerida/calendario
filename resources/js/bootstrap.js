@@ -35,20 +35,21 @@
 
 // import './masonry';
 // import './charts';
-import "./popover";
-import "./scrollbar";
-import "./search";
-import "./sidebar";
 // import './skycons';
 // import './vectorMaps';
 // import './chat';
-import "./datatable";
 // import "./datepicker";
-import "./datetimepicker";
 // import './email';
-import "./fullcalendar";
-// import './googleMaps';
 import "./utils";
+import "./popover";
+import "./scrollbar";
+import "./search";
+
+import "./sidebar";
+import "./fullcalendar";
+import './googleMaps';
+import "./datatable";
+import "./datetimepicker";
 
 import "./sweetalert2";
 // import './select2';

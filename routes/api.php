@@ -25,6 +25,13 @@ Route::get('roles', function () {
         ->toJson();
 });
 
+Route::get('colonies', function () {
+    return datatables(Calendario\Colony::latest('updated_at')->get())
+        ->addColumn('actions', 'colonies.partials.actions')
+        ->rawColumns(['actions'])
+        ->toJson();
+});
+
 Route::get('contingencies', function () {
     return datatables(Calendario\Contingency::latest('updated_at')->get())
         ->addColumn('actions', 'contingencies.partials.actions')

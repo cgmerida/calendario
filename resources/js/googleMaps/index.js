@@ -5,16 +5,24 @@ export default (function () {
   if ($('#google-map').length > 0) {
     loadGoogleMapsAPI({
       key: 'AIzaSyDW8td30_gj6sGXjiMU0ALeMu1SDEwUnEA',
-    }).then(() => {
-      const latitude  = 26.8206;
-      const longitude = 30.8025;
-      const mapZoom   = 5;
-      const { google }    = window;
+      libraries: ['places'],
+    }).then((googleMap) => {
+      const latitude = 14.637795776121346;
+      const longitude = -90.50896548156737;
+      const mapZoom = 14;
+      // const { google } = window;
 
       const mapOptions = {
-        center    : new google.maps.LatLng(latitude, longitude),
-        zoom      : mapZoom,
-        mapTypeId : google.maps.MapTypeId.ROADMAP,
+        center : new googleMap.LatLng(latitude, longitude),
+        zoom : mapZoom,
+        mapTypeId : googleMap.MapTypeId.ROADMAP,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+          position: googleMap.ControlPosition.LEFT_BOTTOM
+        },
+        scaleControl: false,
+        streetViewControl:false,
+        fullscreenControl:true,
         styles: [{
           'featureType': 'landscape',
           'stylers': [
@@ -66,13 +74,15 @@ export default (function () {
         }],
       };
 
-      const map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
+      const map = new googleMap.Map(document.getElementById('google-map'), mapOptions);
 
-      new google.maps.Marker({
-        map,
-        position : new google.maps.LatLng(latitude, longitude),
-        visible  : true,
-      });
+      window.map = map;
+
+      // new googleMap.Marker({
+      //   map,
+      //   position : new googleMap.LatLng(latitude, longitude),
+      //   visible  : true,
+      // });
     });
   }
 }())

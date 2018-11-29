@@ -1,7 +1,7 @@
 import * as $ from "jquery";
 import swal from "sweetalert2";
 
-window.swal = swal
+window.swal = swal;
 
 export default (function() {
     $(document).on("click", "form.delete button", function(e) {
