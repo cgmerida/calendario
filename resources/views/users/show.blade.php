@@ -18,4 +18,6 @@
 	
 @stop
 
-@include('admin.partials.disable')
+@section('js')
+	@include('admin.partials.disable')
+@endsection
