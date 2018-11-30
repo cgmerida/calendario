@@ -39,6 +39,13 @@ Route::get('contingencies', function () {
         ->toJson();
 });
 
+Route::get('unities', function () {
+    return datatables(Calendario\Unity::latest('updated_at')->get())
+        ->addColumn('actions', 'unities.partials.actions')
+        ->rawColumns(['actions'])
+        ->toJson();
+});
+
 Route::get('users', function () {
     return datatables(Calendario\User::latest('updated_at')->get())
         ->addColumn('actions', 'users.partials.actions')

@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('contingencies', 'ContingencyController');
     Route::resource('colonies', 'ColonyController');
+    Route::resource('unities', 'UnityController');
     Route::resource('users', 'UserController');
     Route::resource('events', 'EventController');
     
