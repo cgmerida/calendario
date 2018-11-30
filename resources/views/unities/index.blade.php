@@ -11,7 +11,7 @@
 @section('content')
 
     <div class="mB-20">
-        <a href="{{ route('events.create') }}" class="btn btn-info">
+        <a href="{{ route('unities.create') }}" class="btn btn-info">
             {{ trans('app.add_button') }}
         </a>
     </div>
