@@ -46,6 +46,13 @@ Route::get('unities', function () {
         ->toJson();
 });
 
+Route::get('activities', function () {
+    return datatables(Calendario\Activity::latest('updated_at')->with('unity')->get())
+        ->addColumn('actions', 'activities.partials.actions')
+        ->rawColumns(['actions'])
+        ->toJson();
+});
+
 Route::get('users', function () {
     return datatables(Calendario\User::latest('updated_at')->get())
         ->addColumn('actions', 'users.partials.actions')

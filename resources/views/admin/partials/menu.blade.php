@@ -40,6 +40,17 @@
 </li>
 @endcan
 
+@can('activities.index')
+<li class="nav-item">
+    <a class='sidebar-link' href="{{ route('activities.index') }}">
+        <span class="icon-holder">
+            <i class="c-red-900 ti-agenda"></i>
+        </span>
+        <span class="title">Actividades</span>
+    </a>
+</li>
+@endcan
+
 @can('colonies.index')
 <li class="nav-item">
     <a class='sidebar-link' href="{{ route('colonies.index') }}">
