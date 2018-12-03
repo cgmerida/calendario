@@ -21,8 +21,9 @@
         <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>Titulo</th>
-                    <th>Descripcion</th>
+                    <th>Actividad</th>
+                    <th>Dirección</th>
+                    <th>Descripción</th>
                     <th>Fecha Inicio</th>
                     <th>Fecha Fin</th>
                     <th>Estatus</th>
@@ -32,8 +33,9 @@
             
             <tfoot>
                 <tr>
-                    <th>Titulo</th>
-                    <th>Descripcion</th>
+                    <th>Actividad</th>
+                    <th>Dirección</th>
+                    <th>Descripción</th>
                     <th>Fecha Inicio</th>
                     <th>Fecha Fin</th>
                     <th>Estatus</th>
@@ -50,7 +52,8 @@
         $('#dataTable').DataTable({
             ajax: '/api/events',
             columns: [
-                {data: 'title'},
+                {data: 'activity.name'},
+                {data: 'full_address'},
                 {data: 'description'},
                 {data: 'start'},
                 {data: 'end'},

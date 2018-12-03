@@ -10,8 +10,8 @@ class Event extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'title', 'description', 'start', 'end', 'color',
-        'status', 'user_id',
+        'address', 'description', 'start', 'end',
+        'activity_id', 'colony_id', 'user_id',
     ];
 
     protected $hidden = [
@@ -26,11 +26,16 @@ class Event extends Model
         'deleted_at'
     ];
 
+    public function getFullAddressAttribute(Type $var = null)
+    {
+        return "{$this->address}, Colonia {$this->colony->colony}, Zona {$this->colony->zone}";
+    }
+
     public static function rules()
     {
         return [
-            'title' => 'required|max:255',
-            'description' => 'required',
+            'address' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
             'start' => 'required|date|before:end|after_or_equal:today',
             'end' => 'required|date|after:start',
         ];
@@ -39,6 +44,21 @@ class Event extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    
+    public function activity()
+    {
+        return $this->belongsTo(Activity::class);
+    }
+    
+    public function colony()
+    {
+        return $this->belongsTo(Colony::class);
+    }
+
+    public function contingencies()
+    {
+        return $this->hasMany(Contingency::class);
     }
     
 }

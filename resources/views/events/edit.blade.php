@@ -1,7 +1,7 @@
 @extends('admin.master')
 
 @section('page-header')
-	Evento <small>({{ trans('app.update_item') }})</small>
+	Evento <small>{{ trans('app.update_item') }}</small>
 @stop
 
 @section('content')
@@ -16,29 +16,32 @@
 
 		<button type="submit" class="btn btn-primary">{{ trans('app.edit_button') }}</button>
 		
-		@include('admin.partials.back')
-		
 	{!! Form::close() !!}
-	
 @stop
 
 @section('js')
 	<script>
 		$(function(){
-			
-				let currentDate = new Date();
-				currentDate.setDate(currentDate.getDate() + 5);
-				$('#start').datetimepicker();
-
-				$('#end').datetimepicker();
-				
-				$("#start").on("dp.change", function (e) {
-					$('#start').data("DateTimePicker").minDate(currentDate);
-					$('#end').data("DateTimePicker").minDate(e.date);
-				});
-				$("#end").on("dp.change", function (e) {
-					$('#start').data("DateTimePicker").maxDate(e.date);
-				});
+			let currentDate = new Date();
+			currentDate.setDate(currentDate.getDate() + 5);
+			$('#start').datetimepicker({
+				minDate: currentDate
 			});
+
+			$('#end').datetimepicker({
+				minDate: $('#start').data("DateTimePicker").date()
+			});
+			
+			$("#start").on("dp.change", function (e) {
+				// $('#start').data("DateTimePicker").minDate(currentDate);
+				$('#end').data("DateTimePicker").minDate(e.date);
+			});
+
+			$("#end").on("dp.change", function (e) {
+				$('#start').data("DateTimePicker").maxDate(e.date);
+			});
+		});
 	</script>
+
+	@include('events.partials.selects')
 @endsection

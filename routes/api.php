@@ -32,6 +32,11 @@ Route::get('colonies', function () {
         ->toJson();
 });
 
+Route::get('zone/{zone}/colonies', function ($zone) {
+    return Calendario\Colony::whereZone($zone)
+        ->select('id', 'colony')->get();
+});
+
 Route::get('contingencies', function () {
     return datatables(Calendario\Contingency::latest('updated_at')->get())
         ->addColumn('actions', 'contingencies.partials.actions')
@@ -44,6 +49,11 @@ Route::get('unities', function () {
         ->addColumn('actions', 'unities.partials.actions')
         ->rawColumns(['actions'])
         ->toJson();
+});
+
+Route::get('unities/{id}/activities', function ($id) {
+    $unity = Calendario\Unity::findOrFail($id);
+    return $unity->activities()->select('id', 'name')->get();
 });
 
 Route::get('activities', function () {
@@ -61,7 +71,10 @@ Route::get('users', function () {
 });
 
 Route::get('events', function () {
-    return datatables(Calendario\Event::all())
+    return datatables(Calendario\Event::latest('updated_at')->with('activity', 'colony')->get())
+        ->addColumn('full_address', function($events){
+            return $events->full_address;
+        })
         ->addColumn('actions', 'events.partials.actions')
         ->editColumn('start', function ($events) {
             return $events->start ? with(new Carbon($events->start))->format('d/m/Y H:i:s') : '';

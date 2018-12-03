@@ -3,7 +3,9 @@
 namespace Calendario\Http\Controllers;
 
 use Calendario\Event;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Calendario\{Unity, Colony, Activity};
 
 class EventController extends Controller
 {
@@ -34,7 +36,15 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('events.create');
+        $unities = Unity::pluck('name', 'id')->prepend('Seleccione una unidad', "");
+
+        $activities = [0 => 'Seleccione unidad'];
+
+        $zones = Colony::pluck('zone', 'zone')->prepend('Seleccione una zona', "");
+
+        $colonies = [0 => 'Seleccione zona'];
+        
+        return view('events.create', compact('unities', 'activities', 'zones', 'colonies'));
     }
 
     /**
@@ -45,9 +55,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $requestData = $request->all();
-
-        $validacion = $this->validacion($requestData);
+        $requestData = $this->validacion($request);
 
         Event::create($requestData);
 
@@ -73,7 +81,19 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        return view('events.edit', compact('event'));
+        $unities = Unity::pluck('name', 'id');
+
+        $activities = $event->activity()->pluck('name', 'id');
+
+        $zones = Colony::pluck('zone', 'zone');
+
+        $colonies = $event->colony()->pluck('colony', 'id');
+        
+        $event->unity_id = $event->activity->unity_id;
+        
+        $event->zone = $event->colony->zone;
+        
+        return view('events.edit', compact('event', 'unities', 'activities', 'zones', 'colonies'));
     }
 
     /**
@@ -87,7 +107,7 @@ class EventController extends Controller
     {
         $requestData = $request->all();
 
-        $validacion = $this->validacion($requestData);
+        $this->validacion($requestData);
 
         $event->update($requestData);
 
@@ -107,7 +127,7 @@ class EventController extends Controller
         return back()->withSuccess(trans('app.success_destroy'));
     }
 
-    private function validacion(&$requestData)
+    private function validacion($request)
     {
         $this->validate($request, Event::rules());
 
@@ -120,7 +140,25 @@ class EventController extends Controller
             ->where('end', '>', $requestData['end'])->first();
 
         if ($event_overlap) {
-            return back()->withErrors(['start' => 'Ya existe un evento en este horario'])->withInput();
         }
+
+        // Valida que los eventos no se sobre pongan
+        $event_overlap = Event::whereRaw('? between start and end', [$requestData['start']])
+            ->orWhereRaw('? between start and end', [$requestData['end']])->count();
+
+        if ($event_overlap >= 2) {
+            return back()->withErrors(['start' => 'Solo se pueden atender 2 eventos en el mismo horario'])
+                ->withInput();
+        }
+
+        // Valida que los eventos no sean creados sino es con 5 días de anticipación.
+        $diff = Carbon::parse(Carbon::now())->diffInDays($requestData['start']);
+
+        if ($diff < 4) {
+            return back()->withErrors(['start' => 'El evento debe ser creado con al menos 5 días de anticipación'])
+                ->withInput();
+        }
+
+        return $requestData;
     }
 }

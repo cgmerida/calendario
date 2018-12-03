@@ -59,6 +59,16 @@ class CalendarController extends Controller
         ]);
     }
 
+    public function destroy(Event $event)
+    {
+        $event->delete();
+
+        return response()->json([
+            'message' => 'Se elimino el evento',
+            'status' => 'ok',
+        ]);
+    }
+
     public function validacion(&$requestData)
     {
         //valida que tenga hora de inicio y hora de fin
@@ -69,7 +79,7 @@ class CalendarController extends Controller
             ]);
         }
 
-        // Suma la hora de inicio y la hora de fin a el día seleccionado en el calendario
+        // Concatena la hora de inicio y la hora de fin a el día seleccionado en el calendario
         $requestData['start'] = date("Y-m-d H:i:s", strtotime($requestData['date']
             . " " . $requestData['start']));
         $requestData['end'] = date("Y-m-d H:i:s", strtotime($requestData['date']
@@ -117,15 +127,5 @@ class CalendarController extends Controller
     public function deleteBtn(Event $event)
     {
         return view('calendar.delete-btn', compact('event'));
-    }
-
-    public function destroy(Event $event)
-    {
-        $event->delete();
-
-        return response()->json([
-            'message' => 'Se elimino el evento',
-            'status' => 'ok',
-        ]);
     }
 }
