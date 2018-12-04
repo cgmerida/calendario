@@ -32,5 +32,5 @@ Route::group(['middleware' => ['auth']], function () {
         ]]);
         Route::get('events/delete-btn/{event}', 'CalendarController@deleteBtn')->name('delete-btn');
     });
-    Route::view('calendar', 'calendar.calendar')->name('calendar');
+    Route::get('calendar', 'CalendarController@calendar')->name('calendar');
 });

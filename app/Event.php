@@ -15,7 +15,8 @@ class Event extends Model
     ];
 
     protected $hidden = [
-        'created_at', 'updated_at','deleted_at', 'user_id'
+        'created_at', 'updated_at', 'deleted_at',
+        'user_id',
     ];
 
     protected $dates = [
@@ -26,9 +27,16 @@ class Event extends Model
         'deleted_at'
     ];
 
-    public function getFullAddressAttribute(Type $var = null)
+    protected $appends = ['title'];
+
+    public function getFullAddressAttribute()
     {
-        return "{$this->address}, Colonia {$this->colony->colony}, Zona {$this->colony->zone}";
+        return "{$this->address}, Colonia {$this->colony->name}, Zona {$this->colony->zone}";
+    }
+
+    public function getTitleAttribute()
+    {
+        return "{$this->activity->name} {$this->colony->name}";
     }
 
     public static function rules()

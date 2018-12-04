@@ -2,12 +2,27 @@
 
 namespace Calendario\Http\Controllers;
 
+use Calendario\Colony;
 use Calendario\Event;
+use Calendario\Unity;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
+    public function calendar()
+    {
+        $unities = Unity::pluck('name', 'id')->prepend('Seleccione una unidad', "");
+
+        $activities = ['' => 'Seleccione unidad'];
+
+        $zones = Colony::pluck('zone', 'zone')->prepend('Seleccione una zona', "");
+
+        $colonies = ['' => 'Seleccione zona'];
+
+        return view('calendar.calendar', compact('unities', 'activities', 'zones', 'colonies'));
+    }
+
     public function index(Request $request)
     {
         $events = null;
@@ -15,11 +30,10 @@ class CalendarController extends Controller
         if ($request->start && $request->end) {
             $events = Event::where('start', '>=', $request->start . ' 00:00:00')
                 ->where('end', '<=', $request->end . ' 00:00:00')
-                ->get();
+                ->with(['colony', 'activity.unity'])->get();
         } else {
-            $events = Event::all();
+            $events = Event::with(['colony', 'activity.unity'])->get();
         }
-
         return $events;
     }
 
@@ -33,6 +47,8 @@ class CalendarController extends Controller
         }
 
         $event = Event::create($requestData);
+
+        $event->activity->unity;
 
         return response()->json([
             'message' => 'Se ha creado correctamente',
@@ -51,6 +67,8 @@ class CalendarController extends Controller
         }
 
         $event->update($requestData);
+        
+        $event->activity->unity;
 
         return response()->json([
             'message' => 'Se ha actualizado correctamente',
@@ -126,6 +144,6 @@ class CalendarController extends Controller
 
     public function deleteBtn(Event $event)
     {
-        return view('calendar.delete-btn', compact('event'));
+        return view('calendar.partials.delete-btn', compact('event'));
     }
 }

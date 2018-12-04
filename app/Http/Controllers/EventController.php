@@ -2,10 +2,12 @@
 
 namespace Calendario\Http\Controllers;
 
+use Calendario\Activity;
+use Calendario\Colony;
 use Calendario\Event;
+use Calendario\Unity;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Calendario\{Unity, Colony, Activity};
 
 class EventController extends Controller
 {
@@ -40,10 +42,11 @@ class EventController extends Controller
 
         $activities = [0 => 'Seleccione unidad'];
 
-        $zones = Colony::pluck('zone', 'zone')->prepend('Seleccione una zona', "");
+        $zones = Colony::orderBy('zone', 'asc')->pluck('zone', 'zone')
+            ->prepend('Seleccione una zona', "");
 
         $colonies = [0 => 'Seleccione zona'];
-        
+
         return view('events.create', compact('unities', 'activities', 'zones', 'colonies'));
     }
 
@@ -88,11 +91,11 @@ class EventController extends Controller
         $zones = Colony::pluck('zone', 'zone');
 
         $colonies = $event->colony()->pluck('colony', 'id');
-        
+
         $event->unity_id = $event->activity->unity_id;
-        
+
         $event->zone = $event->colony->zone;
-        
+
         return view('events.edit', compact('event', 'unities', 'activities', 'zones', 'colonies'));
     }
 

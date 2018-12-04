@@ -7010,23 +7010,23 @@ button.bg-dark:focus {
 }
 
 .border {
-  border: 1px solid rgba(0, 0, 0, 0.0625) !important;
+  border: 1px solid rgba(0, 0, 0, 0.065) !important;
 }
 
 .border-top {
-  border-top: 1px solid rgba(0, 0, 0, 0.0625) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.065) !important;
 }
 
 .border-right {
-  border-right: 1px solid rgba(0, 0, 0, 0.0625) !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.065) !important;
 }
 
 .border-bottom {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.0625) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.065) !important;
 }
 
 .border-left {
-  border-left: 1px solid rgba(0, 0, 0, 0.0625) !important;
+  border-left: 1px solid rgba(0, 0, 0, 0.065) !important;
 }
 
 .border-0 {
@@ -10554,7 +10554,7 @@ a.text-gray.active {
 }
 
 hr {
-  border-top: 1px solid rgba(0, 0, 0, 0.0625);
+  border-top: 1px solid rgba(0, 0, 0, 0.065);
 }
 
 .sidebar {
@@ -10609,7 +10609,7 @@ hr {
   }
 
   .sidebar:hover .sidebar-inner .sidebar-logo {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.0625);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.065);
     padding: 0 20px;
   }
 
@@ -10639,8 +10639,8 @@ hr {
 }
 
 .sidebar-logo {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.0625);
-  border-right: 1px solid rgba(0, 0, 0, 0.0625);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.065);
+  border-right: 1px solid rgba(0, 0, 0, 0.065);
   line-height: 0;
   padding: 0 20px;
   -webkit-transition: all 0.2s ease;
@@ -10689,7 +10689,7 @@ hr {
 }
 
 .sidebar-menu {
-  border-right: 1px solid rgba(0, 0, 0, 0.0625);
+  border-right: 1px solid rgba(0, 0, 0, 0.065);
   height: calc(100vh - 65px);
   list-style: none;
   margin: 0;
@@ -10864,7 +10864,7 @@ hr {
   }
 
   .is-collapsed .sidebar:hover .sidebar-inner .sidebar-logo {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.0625);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.065);
     padding: 0 20px;
   }
 
@@ -10887,7 +10887,7 @@ hr {
   }
 
   .is-collapsed .sidebar .sidebar-inner .sidebar-logo {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.0625);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.065);
     padding: 0 20px;
   }
 
@@ -10917,7 +10917,7 @@ hr {
 
 .header {
   background-color: #fff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.0625);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.065);
   display: block;
   margin-bottom: 0;
   padding: 0;
@@ -11035,7 +11035,7 @@ hr {
 }
 
 .header .header-container .dropdown-menu .divider {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.0625);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.065);
   height: 1px;
   overflow: hidden;
 }
@@ -11596,7 +11596,7 @@ footer {
 .email-app .email-side-nav {
   background: #fff;
   position: fixed;
-  border-right: 1px solid rgba(0, 0, 0, 0.0625);
+  border-right: 1px solid rgba(0, 0, 0, 0.065);
   float: left;
   width: 250px;
   -webkit-transition: all 0.3s ease-in-out;
@@ -11652,7 +11652,7 @@ footer {
 @media screen and (min-width: 992px) {
   .email-app .email-wrapper .email-list {
     width: 40%;
-    border-right: 1px solid rgba(0, 0, 0, 0.0625);
+    border-right: 1px solid rgba(0, 0, 0, 0.065);
     float: left;
   }
 }
@@ -68758,23 +68758,23 @@ footer {
 }
 
 .bd {
-  border: 1px solid rgba(0, 0, 0, 0.0625) !important;
+  border: 1px solid rgba(0, 0, 0, 0.065) !important;
 }
 
 .bdT {
-  border-top: 1px solid rgba(0, 0, 0, 0.0625) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.065) !important;
 }
 
 .bdR {
-  border-right: 1px solid rgba(0, 0, 0, 0.0625) !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.065) !important;
 }
 
 .bdB {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.0625) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.065) !important;
 }
 
 .bdL {
-  border-left: 1px solid rgba(0, 0, 0, 0.0625) !important;
+  border-left: 1px solid rgba(0, 0, 0, 0.065) !important;
 }
 
 .bdw-0 {
@@ -80290,7 +80290,7 @@ table.dataTable thead th {
 }
 
 table.dataTable.no-footer {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.0625);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.065);
   margin-bottom: 20px;
 }
 
@@ -80329,7 +80329,7 @@ table.dataTable .sorting_asc:focus {
 }
 
 .dataTables_wrapper .dataTables_length select {
-  border: 3px solid rgba(0, 0, 0, 0.0625);
+  border: 3px solid rgba(0, 0, 0, 0.065);
   border-radius: 2px;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -80355,7 +80355,7 @@ table.dataTable .sorting_asc:focus {
 }
 
 .dataTables_wrapper .dataTables_filter input {
-  border: 2px solid rgba(0, 0, 0, 0.0625);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 2px;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -80453,7 +80453,7 @@ table.dataTable .sorting_asc:focus {
 
 .fc {
   background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.0625);
+  border: 1px solid rgba(0, 0, 0, 0.065);
 }
 
 .fc button {
@@ -80465,7 +80465,7 @@ table.dataTable .sorting_asc:focus {
 }
 
 .fc button.fc-state-default {
-  border-color: rgba(0, 0, 0, 0.0625);
+  border-color: rgba(0, 0, 0, 0.065);
   -webkit-box-shadow: none;
           box-shadow: none;
 }
@@ -80473,7 +80473,7 @@ table.dataTable .sorting_asc:focus {
 .fc button.fc-state-active {
   -webkit-box-shadow: none;
           box-shadow: none;
-  background-color: rgba(0, 0, 0, 0.0625);
+  background-color: rgba(0, 0, 0, 0.065);
 }
 
 .fc-day {
@@ -80499,7 +80499,7 @@ table.dataTable .sorting_asc:focus {
   border-radius: 0;
   -webkit-box-shadow: none;
           box-shadow: none;
-  border: 1px solid rgba(0, 0, 0, 0.0625);
+  border: 1px solid rgba(0, 0, 0, 0.065);
 }
 
 .datepicker table tr th,
@@ -80579,7 +80579,7 @@ table.dataTable .sorting_asc:focus {
   border-radius: 0;
   -webkit-box-shadow: none;
           box-shadow: none;
-  border: 1px solid rgba(0, 0, 0, 0.0625);
+  border: 1px solid rgba(0, 0, 0, 0.065);
 }
 
 .daterangepicker .input-mini {
@@ -80646,7 +80646,7 @@ table.dataTable .sorting_asc:focus {
 .daterangepicker select.minuteselect,
 .daterangepicker select.secondselect,
 .daterangepicker select.ampmselect {
-  border: 1px solid rgba(0, 0, 0, 0.0625);
+  border: 1px solid rgba(0, 0, 0, 0.065);
   min-height: 30px;
 }
 
