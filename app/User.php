@@ -5,10 +5,11 @@ namespace Calendario;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Caffeinated\Shinobi\Traits\ShinobiTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use Notifiable, ShinobiTrait;
+    use Notifiable, ShinobiTrait, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
