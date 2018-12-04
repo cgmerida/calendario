@@ -23,7 +23,6 @@ $.extend($.fn.dataTable.defaults, {
     dom: "Bfrtip",
     serverSide: true,
     processing: true,
-    stateSave: true,
     fixedColumns: true,
     columnDefs: [
         { width: 200, targets: -1 }
@@ -32,17 +31,31 @@ $.extend($.fn.dataTable.defaults, {
         {
             extend: "copy",
             text: '<i class="fa fa-clipboard"></i> Copiar',
-            className: "btn btn-outline-primary"
+            className: "btn btn-outline-primary",
+            exportOptions: {
+                columns: ':visible'
+            }
         },
         {
             extend: "excel",
             text: '<i class="fa fa-file-excel-o"></i> Excel',
-            className: "btn btn-outline-primary"
+            className: "btn btn-outline-primary",
+            exportOptions: {
+                columns: ':visible'
+            }
         },
         {
             extend: "pdf",
             text: '<i class="fa fa-file-pdf-o"></i> PDF',
-            className: "btn btn-outline-primary"
+            className: "btn btn-outline-primary",
+            exportOptions: {
+                columns: ':visible'
+            }
+        },
+        {
+            extend: 'colvis',
+            text: '<i class="fa fa-eye-slash"></i> Visibilidad',
+            className: "btn btn-outline-primary",
         }
     ],
     language: {
