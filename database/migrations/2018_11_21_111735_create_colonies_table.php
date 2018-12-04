@@ -15,7 +15,7 @@ class CreateColoniesTable extends Migration
     {
         Schema::create('colonies', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('colony');
+            $table->string('name');
             $table->integer('zone')->unsigned();
             $table->double('lat', 12, 8)->nullable();
             $table->double('lng', 12, 8)->nullable();

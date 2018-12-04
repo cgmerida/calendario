@@ -33,8 +33,7 @@ Route::get('colonies', function () {
 });
 
 Route::get('zone/{zone}/colonies', function ($zone) {
-    return Calendario\Colony::whereZone($zone)
-        ->select('id', 'colony')->get();
+    return Calendario\Colony::whereZone($zone)->select('id', 'name')->get();
 });
 
 Route::get('contingencies', function () {
@@ -72,7 +71,7 @@ Route::get('users', function () {
 
 Route::get('events', function () {
     return datatables(Calendario\Event::latest('updated_at')->with('activity', 'colony')->get())
-        ->addColumn('full_address', function($events){
+        ->addColumn('full_address', function ($events) {
             return $events->full_address;
         })
         ->addColumn('actions', 'events.partials.actions')
