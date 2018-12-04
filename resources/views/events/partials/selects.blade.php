@@ -23,7 +23,7 @@
 					select.empty();
 
 					$.each(data,function(key, value) {
-						select.append('<option value=' + value.id + '>' + value.colony + '</option>');
+						select.append('<option value=' + value.id + '>' + value.name + '</option>');
 					});
 				});
 			});
