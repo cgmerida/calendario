@@ -22,16 +22,17 @@
         <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>Colonia</th>
+                    <th>Nombre</th>
                     <th>Zona</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             
             <tfoot>
-                <th>Colonia</th>
-                <th>Zona</th>
-                <th>Acciones</th>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Zona</th>
+                    <th>Acciones</th>
                 </tr>
             </tfoot>
         
@@ -45,7 +46,7 @@
         $('#dataTable').DataTable({
             ajax: '/api/colonies',
             columns: [
-                {data: 'colony'},
+                {data: 'name'},
                 {data: 'zone'},
                 {data: 'actions'}
             ]
