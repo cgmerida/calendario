@@ -8,6 +8,8 @@ use Calendario\Event;
 use Calendario\Unity;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Calendario\Contingency;
+use Calendario\Attendance;
 
 class EventController extends Controller
 {
@@ -28,7 +30,16 @@ class EventController extends Controller
      */
     public function index()
     {
-        return view('events.index');
+        $statuses = [
+            "Pendiente" => "Pendiente",
+            "Agendado" => "Agendado",
+            "Realizado" => "Realizado",
+            "Rechazado" => "Rechazado",
+            "No Realizado" => "No Realizado",
+        ];
+        $contingencies = Contingency::all();
+
+        return view('events.index', compact('statuses', 'contingencies'));
     }
 
     /**
@@ -73,7 +84,19 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        $unities = Unity::pluck('name', 'id');
+
+        $activities = $event->activity()->pluck('name', 'id');
+
+        $zones = Colony::pluck('zone', 'zone');
+
+        $colonies = $event->colony()->pluck('name', 'id');
+
+        $event->unity_id = $event->activity->unity_id;
+
+        $event->zone = $event->colony->zone;
+
+        return view('events.show', compact('event', 'unities', 'activities', 'zones', 'colonies'));
     }
 
     /**
@@ -90,7 +113,7 @@ class EventController extends Controller
 
         $zones = Colony::pluck('zone', 'zone');
 
-        $colonies = $event->colony()->pluck('colony', 'id');
+        $colonies = $event->colony()->pluck('name', 'id');
 
         $event->unity_id = $event->activity->unity_id;
 
@@ -113,6 +136,28 @@ class EventController extends Controller
         $this->validacion($requestData);
 
         $event->update($requestData);
+
+        return redirect()->route('events.index')->withSuccess(trans('app.success_update'));
+    }
+
+    /**
+     * Cierra el evento guardando el estatus, la respuesta y las contingencias.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Calendario\Event  $event
+     * @return \Illuminate\Http\Response
+     */
+    public function close(Request $request, Event $event)
+    {
+        $event->status = $request->status;
+        
+        $event->response = $request->response;
+
+        $event->attendance()->create(['attendance' => $request->attendance]);
+
+        $event->contingencies()->sync($request->contingencies);
+
+        $event->save();
 
         return redirect()->route('events.index')->withSuccess(trans('app.success_update'));
     }

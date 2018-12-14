@@ -30,7 +30,7 @@
                 week: "semana",
                 day: "día"
             },
-            height: 800,
+            height: 'auto',
             editable: true,
             dayClick: function(date, jsEvent, view) {
                 if (view.name === 'month') {
@@ -158,6 +158,9 @@
     }
 
     function EventUpdate(event, delta, revertFunc) {
+        if ($('.popover').length > 0) {
+            $('.popover').remove();
+        }
         let d = new Date();
         if(event.start > d.getTime()){
             const action = 'calendar/events/' + event.id;

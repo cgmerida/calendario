@@ -53,5 +53,6 @@ import "./datetimepicker";
 
 import "./sweetalert2";
 // import './select2';
+import "./bootstrap-select";
 
 global.$ = global.jQuery = require("jquery");

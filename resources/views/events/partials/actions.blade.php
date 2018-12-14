@@ -1,38 +1,47 @@
 <ul class="list-inline">
     
-        @can('events.show')
-        <li class="list-inline-item">
-            <a href="{{ route('events.show', $id) }}"
-            title="Ver" class="btn btn-sm btn-outline-secondary">
-                <span class="ti-eye"></span>
-            </a>
-        </li>
-        @endcan
-        
-        @can('events.edit')
-        <li class="list-inline-item">
-            <a href="{{ route('events.edit', $id) }}" 
-            title="{{ trans('app.edit_title') }}" data-toggle="tooltip"
-            class="btn btn-outline-primary btn-sm">
-                <span class="ti-pencil"></span>
-            </a>
-        </li>
-        @endcan
-        
-        @can('events.destroy')
-        <li class="list-inline-item">
-            {!! Form::open([
-                'class'=>'delete',
-                'route'  => ['events.destroy', $id], 
-                'method' => 'DELETE',
-                ]) 
-            !!}
+    @can('events.show')
+    <li class="list-inline-item">
+        <a href="{{ route('events.show', $id) }}"
+        title="Ver" class="btn btn-sm btn-outline-secondary">
+            <span class="ti-eye"></span>
+        </a>
+    </li>
+    @endcan
     
-                <button class="btn btn-outline-danger btn-sm" title="{{ trans('app.delete_title') }}">
-                    <i class="ti-trash"></i>
-                </button>
-                
-            {!! Form::close() !!}
-        </li>
-        @endcan
-    </ul>
+    @can('events.edit')
+    <li class="list-inline-item">
+        <a href="{{ route('events.edit', $id) }}" 
+        title="{{ trans('app.edit_title') }}" data-toggle="tooltip"
+        class="btn btn-outline-primary btn-sm">
+            <span class="ti-pencil"></span>
+        </a>
+    </li>
+    @endcan
+
+    @can('events.close')       
+    <li class="list-inline-item">
+        <button type="button" class="btn btn-outline-success btn-sm"
+        data-toggle="modal" data-target="#close-modal" data-id="{{ $id }}">
+            <i class="ti-check-box"></i>
+        </button>
+    </li>
+    @endcan
+        
+    @can('events.destroy')
+    <li class="list-inline-item">
+        {!! Form::open([
+            'class'=>'delete',
+            'route'  => ['events.destroy', $id], 
+            'method' => 'DELETE',
+            ]) 
+        !!}
+
+            <button class="btn btn-outline-danger btn-sm" title="{{ trans('app.delete_title') }}">
+                <i class="ti-trash"></i>
+            </button>
+            
+        {!! Form::close() !!}
+    </li>
+    @endcan
+</ul>

@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('activities', 'ActivityController');
     Route::resource('users', 'UserController');
     Route::resource('events', 'EventController');
+    Route::post('events/{event}/close', 'EventController@close')->name('events.close');
     
     Route::view('admin', 'admin.dashboard.index')->name('admin.dash');
 

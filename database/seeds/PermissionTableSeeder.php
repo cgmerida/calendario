@@ -106,37 +106,7 @@ class PermissionTableSeeder extends Seeder
             'description' => 'Eliminar cualquier colonia del sistema',
         ]);
 
-        //EVENTS
-        Permission::create([
-            'name' => 'Navegar eventos',
-            'slug' => 'events.index',
-            'description' => 'Lista y navega todos los eventos del sistema',
-        ]);
-
-        Permission::create([
-            'name' => 'Creación de eventos',
-            'slug' => 'events.create',
-            'description' => 'Crea nuevos eventos para el sistema',
-        ]);
-
-        Permission::create([
-            'name' => 'Ver detalle de evento',
-            'slug' => 'events.show',
-            'description' => 'Lista y navega todos los eventos del sistema',
-        ]);
-
-        Permission::create([
-            'name' => 'Edición de evento',
-            'slug' => 'events.edit',
-            'description' => 'Editar cualquier dato de un evento del sistema',
-        ]);
-
-        Permission::create([
-            'name' => 'Eliminar evento',
-            'slug' => 'events.destroy',
-            'description' => 'Eliminar cualquier evento del sistema',
-        ]);
-
+        
         //CONTINGENCY
         Permission::create([
             'name' => 'Navegar contingencias',
@@ -167,5 +137,43 @@ class PermissionTableSeeder extends Seeder
             'slug' => 'contingencies.destroy',
             'description' => 'Eliminar cualquier contingencia del sistema',
         ]);
+        
+        //EVENTS
+        Permission::create([
+            'name' => 'Navegar eventos',
+            'slug' => 'events.index',
+            'description' => 'Lista y navega todos los eventos del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Creación de eventos',
+            'slug' => 'events.create',
+            'description' => 'Crea nuevos eventos para el sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Ver detalle de evento',
+            'slug' => 'events.show',
+            'description' => 'Lista y navega todos los eventos del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Edición de evento',
+            'slug' => 'events.edit',
+            'description' => 'Editar cualquier dato de un evento del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Cerrar evento',
+            'slug' => 'events.close',
+            'description' => 'Cierra los eventos en el sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Eliminar evento',
+            'slug' => 'events.destroy',
+            'description' => 'Eliminar cualquier evento del sistema',
+        ]);
+
     }
 }
