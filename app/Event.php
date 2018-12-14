@@ -66,7 +66,11 @@ class Event extends Model
 
     public function contingencies()
     {
-        return $this->hasMany(Contingency::class);
+        return $this->belongsToMany(Contingency::class);
     }
     
+    public function attendance()
+    {
+        return $this->hasOne(Attendance::class);
+    }
 }

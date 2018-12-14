@@ -21,4 +21,9 @@ class Contingency extends Model
             'description' => 'required|string|max:255',
         ];
     }
+    
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
 }
