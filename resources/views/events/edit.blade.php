@@ -29,12 +29,14 @@
 			});
 
 			$('#end').datetimepicker({
-				minDate: $('#start').data("DateTimePicker").date()
+				minDate: $('#start').data("DateTimePicker").date(),
+				maxDate: $('#start').data("DateTimePicker").date().format('YYYY-MM-DD') + ' 23:59:59'
 			});
 			
 			$("#start").on("dp.change", function (e) {
 				// $('#start').data("DateTimePicker").minDate(currentDate);
 				$('#end').data("DateTimePicker").minDate(e.date);
+				$('#end').data("DateTimePicker").maxDate(e.date.format('YYYY-MM-DD') + ' 23:59:59');
 			});
 
 			$("#end").on("dp.change", function (e) {
