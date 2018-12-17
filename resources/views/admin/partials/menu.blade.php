@@ -7,6 +7,18 @@
     </a>
 </li>
 
+
+@can('users.index')
+<li class="nav-item">
+    <a class='sidebar-link' href="{{ route('users.index') }}">
+        <span class="icon-holder">
+            <i class="c-red-500 ti-user"></i>
+        </span>
+        <span class="title">Usuarios</span>
+    </a>
+</li>
+@endcan
+
 @can('roles.index')
 <li class="nav-item">
     <a class='sidebar-link' href="{{ route('roles.index') }}">
@@ -25,6 +37,17 @@
             <i class="c-brown-700 ti-alert"></i>
         </span>
         <span class="title">Contingencias</span>
+    </a>
+</li>
+@endcan
+
+@can('priorities.index')
+<li class="nav-item">
+    <a class='sidebar-link' href="{{ route('priorities.index') }}">
+        <span class="icon-holder">
+            <i class="c-indigo-700 ti-list"></i>
+        </span>
+        <span class="title">Prioridades</span>
     </a>
 </li>
 @endcan
@@ -61,18 +84,6 @@
     </a>
 </li>
 @endcan
-
-@can('users.index')
-<li class="nav-item">
-    <a class='sidebar-link' href="{{ route('users.index') }}">
-        <span class="icon-holder">
-            <i class="c-red-500 ti-user"></i>
-        </span>
-        <span class="title">Usuarios</span>
-    </a>
-</li>
-@endcan
-
 
 @can('events.index')
 <li class="nav-item">
