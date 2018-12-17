@@ -27,6 +27,7 @@ $.extend($.fn.dataTable.defaults, {
     columnDefs: [
         { width: 200, targets: -1 }
     ],
+    autoWidth: false,
     buttons: [
         {
             extend: "copy",

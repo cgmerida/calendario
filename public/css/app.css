@@ -80671,3 +80671,7 @@ img {
   background: none;
 }
 
+div.modal.fade {
+  padding-left: 0 !important;
+}
+

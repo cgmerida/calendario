@@ -23,6 +23,19 @@ class CalendarController extends Controller
         return view('calendar.calendar', compact('unities', 'activities', 'zones', 'colonies'));
     }
 
+    public function show()
+    {
+        $unities = Unity::pluck('name', 'id')->prepend('Seleccione una unidad', "");
+
+        $activities = ['' => 'Seleccione unidad'];
+
+        $zones = Colony::pluck('zone', 'zone')->prepend('Seleccione una zona', "");
+
+        $colonies = ['' => 'Seleccione zona'];
+
+        return view('calendar.show', compact('unities', 'activities', 'zones', 'colonies'));
+    }
+
     public function index(Request $request)
     {
         $events = null;

@@ -43,7 +43,7 @@ class ActivityTableSeeder extends CsvSeeder
         try {
             DB::table($this->table)->insert($seedData);
         } catch (\Exception $e) {
-            Log::error("CSV insert failed: " . $e->getMessage() . " - CSV " . $this->filename);
+            Log::error("Fallo la insercion en la base de datos: " . $e->getMessage() . " - CSV " . $this->filename);
             return false;
         }
         return true;

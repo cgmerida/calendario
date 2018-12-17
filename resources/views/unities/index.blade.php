@@ -10,11 +10,13 @@
 
 @section('content')
 
-    <div class="mB-20">
-        <a href="{{ route('unities.create') }}" class="btn btn-info">
-            {{ trans('app.add_button') }}
-        </a>
-    </div>
+    @can('users.create')
+        <div class="mB-20">
+            <a href="{{ route('unities.create') }}" class="btn btn-info">
+                {{ trans('app.add_button') }}
+            </a>
+        </div>
+    @endcan
 
 
     <div class="bgc-white bd bdrs-3 p-20 mB-20">

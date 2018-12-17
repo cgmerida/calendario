@@ -17,7 +17,7 @@ class CreateActivitiesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('require');
-            $table->integer('unity_id')->unsigned()->nullable();
+            $table->integer('unity_id')->unsigned();
             $table->foreign('unity_id')->references('id')->on('unities');
             $table->timestamps();
         });

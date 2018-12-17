@@ -1,48 +1,48 @@
-unity_id;name;require
-Desarrollo Social Central;Marimba Orquesta;Toldo 610x976 (para tarima), 3 toldos de 6x4 (para publico), 150 sillas, Tarima de 6.10x4.88, 2 tableros, sonido (DSC)
-Desarrollo Social Central;Ensamble de Marimbas;6 Toldos de 6x4 (para publico) 300 sillas, sonido de 2 proyectores, 2 tableros
-Desarrollo Social Central;Concierto de Marimba;1 Tarima 6.10x4.88y 50cm de alto, 1 toldo de 6x6 para tarima, 3 toldos de 6x4 para publico, sonido de 2 proyectores, 200 sillas 
-Desarrollo Social Central;Baile de Santa Rosita;1 Tarima de 6.10 x 4.88 mt x 1mt de alto, 1 toldo de 6x6 para tarima, 3 toldos de 6x4 para publico, 1 toldo de 6X4 para camerino, 3 tableros, 200 sillas y sonido dos proyectores, Iluminacion (DSC)
-Desarrollo Social Central;Banda Sinfonica Municipal;300 sillas (R/N) 
-Desarrollo Social Central;Danza Municipal;1 Tarima 6.10x9.76, 1 toldo 6x4 con paredes para camerino, 4 toldos 6x4 para publico, Sonido de dos proyectores, 3 tableros, 300 sillas, iluminacion (DSC)
-Desarrollo Social Central;Grupo POP;3 toldos 6x4 para publico, 1 toldo de 6x4 con paredes para camerino, 200 sillas, 2 tableros, sonido, tarima, toldo para presentacion (DSC)
-Desarrollo Social Central;Ensamble de Guitarras;3 toldos 6x4 para publico, 1 toldo de 6x4 con paredes para camerino, 200 sillas, 2 tableros, sonido, tarima, toldo para presentacion (DSC)
-Desarrollo Social Central;Teatro en Tu Barrio ;1 Tarima de 6x10 x 4.88m, 1 toldo de 6x6 para tarima, 3 toldos de 6x4 para publico, 200 sillas, 3 tableros, Sonido e iluminacion (DSC)
-Desarrollo Social Central;Museo del Ni�o;Transporte
+﻿unity_id;name;require
+Desarrollo Social Central;Marimba Orquesta;Toldo 610x976 (para tarima), 3 toldos de 6x4 (para público), 150 sillas, Tarima de 6.10x4.88, 2 tableros, sonido (DSC)
+Desarrollo Social Central;Ensamble de Marimbas;6 Toldos de 6x4 (para público) 300 sillas, sonido de 2 proyectores, 2 tableros
+Desarrollo Social Central;Concierto de Marimba;1 Tarima 6.10x4.88y 50cm de alto, 1 toldo de 6x6 para tarima, 3 toldos de 6x4 para público, sonido de 2 proyectores, 200 sillas 
+Desarrollo Social Central;Baile de Santa Rosita;1 Tarima de 6.10 x 4.88 mt x 1mt de alto, 1 toldo de 6x6 para tárima, 3 toldos de 6x4 para público, 1 toldo de 6X4 para camerino, 3 tableros, 200 sillas y sonido dos proyectores, Iluminación (DSC)
+Desarrollo Social Central;Banda Sinfónica Municipal;300 sillas (R/N) 
+Desarrollo Social Central;Danza Municipal;1 Tarima 6.10x9.76, 1 toldo 6x4 con paredes para camerino, 4 toldos 6x4 para público, Sonido de dos proyectores, 3 tableros, 300 sillas, iluminación (DSC)
+Desarrollo Social Central;Grupo POP;3 toldos 6x4 para público, 1 toldo de 6x4 con paredes para camerino, 200 sillas, 2 tableros, sonido, tarima, toldo para presentación (DSC)
+Desarrollo Social Central;Ensamble de Guitarras;3 toldos 6x4 para público, 1 toldo de 6x4 con paredes para camerino, 200 sillas, 2 tableros, sonido, tarima, toldo para presentación (DSC)
+Desarrollo Social Central;Teatro en Tu Barrio ;1 Tarima de 6x10 x 4.88m, 1 toldo de 6x6 para tarima, 3 toldos de 6x4 para público, 200 sillas, 3 tableros, Sonido e iluminación (DSC)
+Desarrollo Social Central;Museo del Niño;Transporte
 Desarrollo Social Central;Recorrido Vive Tu Ciudad;Transporte
-Desarrollo Social Central;Mudi-Educa Movil;2 toldos (se utilizan los de AA por 15 dias)
-Subdireccion de areas en desarrollo;Diverty Muni;No Requiere Logistica de Regencia Norte
-Subdireccion de areas en desarrollo;Feria en Tu Barrio ;8 toldos y 300 sillas
-Protocolo Municipalidad Central;Actos Civicos;No Requiere Logistica 
-Protocolo Municipalidad Central;Reconocimiento: Mas Alla del deber;No Requiere Logistica 
-area Social/ DS Central;Festival Cultural ;Transporte
-area Social/ DS Central;Festival Navide�o;Transporte
-area Social/ DS Central;Posadas Navide�as/Pastorela;2 toldos de 6x4, 75 sillas, 4 tableros, sonido de dos proyectores, Tarima e iluminacion (DSC)
-Cursos Tecnico Productivos / DSC;Curso de Belleza;Tableros
-Cursos Tecnico Productivos / DSC;Curso de Reposteria;Tableros
-Cursos Tecnico Productivos / DSC;Curso de Blancos;Tableros 
-Cursos Tecnico Productivos / DSC;Curso elaboracion dulces tipicos;Tableros 
-Cursos Tecnico Productivos / DSC;Curso de manualidades;Tableros y sillas
-Cursos Tecnico Productivos / DSC;Curso de Corte y Confeccion;Tableros
-Cursos Tecnico Productivos / DSC;Curso de Gastronomia;Tableros
-Oficina EMEFUT;Escuelas de EMEFUT area Norte;No Requiere Logistica
-Oficina EMEFUT;Campeonatos Relampago en ferias en tu barrio;No Requiere Logistica
-Actividades Masivas Regencias Norte;Entrega de utiles escolares;6 Toldos de 6x4, 200 sillas, 6 tableros, sonido de dos proyectores 
-Actividades Masivas Regencias Norte;Conmemoracion dia de la mujer;6 Toldos de 6x4, 200 sillas, 6 tableros, sonido de dos proyectores, Pantalla LED
-Actividades Masivas Regencias Norte;Celebracion Dia de la madre;1 de 10x21 mts, Tarima 3.66 x6.10 x50 cm, sonido de 4 proyectores, 1,000 sillas, 10 tableros, 6 toldos de 6x4, manteleria (rentada)
+Desarrollo Social Central;Mudi-Educa Móvil;2 toldos (se utilizan los de AA por 15 días)
+Subdirección de áreas en desarrollo;Diverty Muni;No Requiere Logística de Regencia Norte
+Subdirección de áreas en desarrollo;Feria en Tu Barrio ;8 toldos y 300 sillas
+Protocolo Municipalidad Central;Actos Cívicos;No Requiere Logística 
+Protocolo Municipalidad Central;Reconocimiento: Más Allá del deber;No Requiere Logística 
+Área Social/ DS Central;Festival Cultural ;Transporte
+Área Social/ DS Central;Festival Navideño;Transporte
+Área Social/ DS Central;Posadas Navideñas/Pastorela;2 toldos de 6x4, 75 sillas, 4 tableros, sonido de dos proyectores, Tárima e iluminación (DSC)
+Cursos Técnico Productivos / DSC;Curso de Belleza;Tableros
+Cursos Técnico Productivos / DSC;Curso de Repostería;Tableros
+Cursos Técnico Productivos / DSC;Curso de Blancos;Tableros 
+Cursos Técnico Productivos / DSC;Curso elaboración dulces típicos;Tableros 
+Cursos Técnico Productivos / DSC;Curso de manualidades;Tableros y sillas
+Cursos Técnico Productivos / DSC;Curso de Corte y Confección;Tableros
+Cursos Técnico Productivos / DSC;Curso de Gastronomía;Tableros
+Oficina EMEFUT;Escuelas de EMEFUT área Norte;No Requiere Logística
+Oficina EMEFUT;Campeonatos Relampago en ferias en tu barrio;No Requiere Logística
+Actividades Masivas Regencias Norte;Entrega de útiles escolares;6 Toldos de 6x4, 200 sillas, 6 tableros, sonido de dos proyectores 
+Actividades Masivas Regencias Norte;Conmemoración día de la mujer;6 Toldos de 6x4, 200 sillas, 6 tableros, sonido de dos proyectores, Pantalla LED
+Actividades Masivas Regencias Norte;Celebración Día de la madre;1 de 10x21 mts, Tarima 3.66 x6.10 x50 cm, sonido de 4 proyectores, 1,000 sillas, 10 tableros, 6 toldos de 6x4, manteleria (rentada)
 Actividades Masivas Regencias Norte;Homenaje a Docentes;1 Tarima de 6.10 x 4.88 mt, sonido de 4 proyectores, 15 tableros, 90 mesas rendondas con mantel y cubremantel, 1000 sillas, pantalla LED
 Actividades Masivas Regencias Norte;Congreso Infantil de Literatura;1 Tarima de 6.10 x 4.88 mts, 1 Toldo blanco de 10x21  10 toldos de 6x4 para stands, Sonido de dos proyectores, 500 sillas, 10 tableros, pantalla LED, Refacciones 
-Actividades Masivas Regencias Norte;Celebracion Dia del ni�o ;1 Tarima de 6.10x 4.88 mts, 10 toldos, 10 tableros, sonido de dos proyectores, refacciones
-Oficina Desarrollo Integral;Valija Viajera;No Requiere Logistica
-Oficina Desarrollo Integral;Cuenta Cuentos;No Requiere Logistica 
-Oficina Desarrollo Integral;Biblioteca Generacion del 40;En actividades especiales requiere: 3 toldos de 6x4, 200 sillas, sonido de dos proyectores, pabellon  y bandera municipal 
+Actividades Masivas Regencias Norte;Celebración Día del niño ;1 Tarima de 6.10x 4.88 mts, 10 toldos, 10 tableros, sonido de dos proyectores, refacciones
+Oficina Desarrollo Integral;Valija Viajera;No Requiere Logística
+Oficina Desarrollo Integral;Cuenta Cuentos;No Requiere Logística 
+Oficina Desarrollo Integral;Biblioteca Generación del 40;En actividades especiales requiere: 3 toldos de 6x4, 200 sillas, sonido de dos proyectores, pabellón  y bandera municipal 
 Oficina Desarrollo Integral;Clase Especial de Gimnasia ;1 tarima 2.44x3.66 y sonido de 2 proyectores
-Oficina Desarrollo Integral;Super Clase de Gimnasia Ritmica;1 tarima 2.44x3.66, 1 toldo de 6x4 para tarima, sonido de 2 proyectores, 2 tableros, dispensador de agua pura
-Actividades Alcaldias Auxiliares;Diversas actividades programadas;Prestamo a vecinos de sillas y/o toldos
-Actividades Alcaldias Auxiliares;Inaguraciones de Proyectos ;3 Toldos de 6x4, 100 sillas, sonido de dos proyectores 
-Actividades Alcaldias Auxiliares;Clases de Baile ;1 Tarima 6.10x 4.88, sonido de dos proyectores
-Actividades Alcaldias Auxiliares;Convivencias Navide�as ;AA Lavarreda: 60 tableros con mantel y cubre mantel, 600 sillas, sonido de 4 proyectores y AA Gran Ca�on: 20 tableros con mantel y cubre mantel y 200 sillas 
-Direccion Municipal del Mujer;Clases de Zumba;No requiere Logistica 
-Direccion Municipal del Mujer;Jornadas de Papanicolau;2 camillas, 1 lampara, 1 toldo de 6x4 con paredes para clinica, 1 toldo de 6x4 para sala de espera, 3 tableros, 75 sillas 
-Direccion Municipal del Mujer;Curso de manualidades;4 Tableros, sillas 
-Oficina MUNIJOVEN;Becas de Ingles IGA/CALUSAC;Inscripcion: Sonido peque�o, 2 tableros, 100 sillas
+Oficina Desarrollo Integral;Súper Clase de Gimnasia Ritmica;1 tarima 2.44x3.66, 1 toldo de 6x4 para tarima, sonido de 2 proyectores, 2 tableros, dispensador de agua pura
+Actividades Alcaldías Auxiliares;Diversas actividades programadas;Préstamo a vecinos de sillas y/o toldos
+Actividades Alcaldías Auxiliares;Inaguraciones de Proyectos ;3 Toldos de 6x4, 100 sillas, sonido de dos proyectores 
+Actividades Alcaldías Auxiliares;Clases de Baile ;1 Tarima 6.10x 4.88, sonido de dos proyectores
+Actividades Alcaldías Auxiliares;Convivencias Navideñas ;AA Lavarreda: 60 tableros con mantel y cubre mantel, 600 sillas, sonido de 4 proyectores y AA Gran Cañón: 20 tableros con mantel y cubre mantel y 200 sillas 
+Dirección Municipal del Mujer;Clases de Zumba;No requiere Logística 
+Dirección Municipal del Mujer;Jornadas de Papanicolau;2 camillas, 1 lámpara, 1 toldo de 6x4 con paredes para clínica, 1 toldo de 6x4 para sala de espera, 3 tableros, 75 sillas 
+Dirección Municipal del Mujer;Curso de manualidades;4 Tableros, sillas 
+Oficina MUNIJOVEN;Becas de Inglés IGA/CALUSAC;Inscripción: Sonido pequeño, 2 tableros, 100 sillas
