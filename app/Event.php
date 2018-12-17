@@ -27,7 +27,7 @@ class Event extends Model
         'deleted_at'
     ];
 
-    protected $appends = ['title'];
+    protected $appends = ['title', 'color', 'textColor'];
 
     public function getFullAddressAttribute()
     {
@@ -37,6 +37,16 @@ class Event extends Model
     public function getTitleAttribute()
     {
         return "{$this->activity->name} {$this->colony->name}";
+    }
+
+    public function getColorAttribute()
+    {
+        return $this->activity->unity->priority->color;
+    }
+
+    public function getTextColorAttribute()
+    {
+        return $this->activity->unity->priority->textColor;
     }
 
     public static function rules()

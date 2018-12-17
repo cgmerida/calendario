@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUnitiesTable extends Migration
+class CreatePrioritiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateUnitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('unities', function (Blueprint $table) {
+        Schema::create('priorities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('priority_id')->unsigned();
-            $table->foreign('priority_id')->references('id')->on('priorities');
+            $table->string('color');
+            $table->string('textColor');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateUnitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('unities');
+        Schema::dropIfExists('priorities');
     }
 }

@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('contingencies', 'ContingencyController');
     Route::resource('colonies', 'ColonyController');
+    Route::resource('priorities', 'PriorityController');
     Route::resource('unities', 'UnityController');
     Route::resource('activities', 'ActivityController');
     Route::resource('users', 'UserController');
@@ -34,4 +35,5 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('events/delete-btn/{event}', 'CalendarController@deleteBtn')->name('delete-btn');
     });
     Route::get('calendar', 'CalendarController@calendar')->name('calendar');
+    Route::get('calendar/show', 'CalendarController@show')->name('calendar.show');
 });

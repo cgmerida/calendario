@@ -43,6 +43,20 @@ Route::get('contingencies', function () {
         ->toJson();
 });
 
+Route::get('priorities', function () {
+    return datatables(Calendario\Priority::latest('updated_at')->get())
+        ->editColumn('color', '<div class="color-div" style="background: {{ $color }};"></div>')
+        ->editColumn('textColor', function (Calendario\Priority $priority) {
+            if($priority->textColor === '#fff')
+                return 'Blanco';
+            else
+                return 'Negro';
+        })
+        ->addColumn('actions', 'priorities.partials.actions')
+        ->rawColumns(['actions', 'color'])
+        ->toJson();
+});
+
 Route::get('unities', function () {
     return datatables(Calendario\Unity::latest('updated_at')->get())
         ->addColumn('actions', 'unities.partials.actions')

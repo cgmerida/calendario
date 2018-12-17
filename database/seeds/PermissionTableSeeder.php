@@ -75,38 +75,6 @@ class PermissionTableSeeder extends Seeder
             'description' => 'Eliminar cualquier rol del sistema',
         ]);
 
-        //colonies
-        Permission::create([
-            'name' => 'Navegar colonias',
-            'slug' => 'colonies.index',
-            'description' => 'Lista y navega todas las colonias del sistema',
-        ]);
-
-        Permission::create([
-            'name' => 'Creación de colonias',
-            'slug' => 'colonies.create',
-            'description' => 'Crea nuevos colonias para el sistema',
-        ]);
-
-        Permission::create([
-            'name' => 'Ver detalle de colonia',
-            'slug' => 'colonies.show',
-            'description' => 'Lista y navega todos los colonias del sistema',
-        ]);
-
-        Permission::create([
-            'name' => 'Edición de colonia',
-            'slug' => 'colonies.edit',
-            'description' => 'Editar cualquier dato de un colonia del sistema',
-        ]);
-
-        Permission::create([
-            'name' => 'Eliminar colonia',
-            'slug' => 'colonies.destroy',
-            'description' => 'Eliminar cualquier colonia del sistema',
-        ]);
-
-        
         //CONTINGENCY
         Permission::create([
             'name' => 'Navegar contingencias',
@@ -136,6 +104,130 @@ class PermissionTableSeeder extends Seeder
             'name' => 'Eliminar contingencia',
             'slug' => 'contingencies.destroy',
             'description' => 'Eliminar cualquier contingencia del sistema',
+        ]);
+
+        //PRIORITY
+        Permission::create([
+            'name' => 'Navegar prioridades',
+            'slug' => 'priorities.index',
+            'description' => 'Lista y navega todos los prioridades del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Creación de prioridades',
+            'slug' => 'priorities.create',
+            'description' => 'Crea nuevos prioridades para el sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Ver detalle de prioridad',
+            'slug' => 'priorities.show',
+            'description' => 'Lista y navega todos los prioridades del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Edición de prioridad',
+            'slug' => 'priorities.edit',
+            'description' => 'Editar cualquier dato de un prioridad del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Eliminar prioridad',
+            'slug' => 'priorities.destroy',
+            'description' => 'Eliminar cualquier prioridad del sistema',
+        ]);
+
+        //UNITY
+        Permission::create([
+            'name' => 'Navegar unidades',
+            'slug' => 'unities.index',
+            'description' => 'Lista y navega todos los unidades del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Creación de unidades',
+            'slug' => 'unities.create',
+            'description' => 'Crea nuevos unidades para el sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Ver detalle de unidad',
+            'slug' => 'unities.show',
+            'description' => 'Lista y navega todos los unidades del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Edición de unidad',
+            'slug' => 'unities.edit',
+            'description' => 'Editar cualquier dato de un unidad del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Eliminar unidad',
+            'slug' => 'unities.destroy',
+            'description' => 'Eliminar cualquier unidad del sistema',
+        ]);
+
+        //ACTIVITY
+        Permission::create([
+            'name' => 'Navegar actividades',
+            'slug' => 'activities.index',
+            'description' => 'Lista y navega todos los actividades del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Creación de actividades',
+            'slug' => 'activities.create',
+            'description' => 'Crea nuevos actividades para el sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Ver detalle de actividad',
+            'slug' => 'activities.show',
+            'description' => 'Lista y navega todos los actividades del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Edición de actividad',
+            'slug' => 'activities.edit',
+            'description' => 'Editar cualquier dato de un actividad del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Eliminar actividad',
+            'slug' => 'activities.destroy',
+            'description' => 'Eliminar cualquier actividad del sistema',
+        ]);
+
+        //COLONY
+        Permission::create([
+            'name' => 'Navegar colonias',
+            'slug' => 'colonies.index',
+            'description' => 'Lista y navega todas las colonias del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Creación de colonias',
+            'slug' => 'colonies.create',
+            'description' => 'Crea nuevos colonias para el sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Ver detalle de colonia',
+            'slug' => 'colonies.show',
+            'description' => 'Lista y navega todos los colonias del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Edición de colonia',
+            'slug' => 'colonies.edit',
+            'description' => 'Editar cualquier dato de un colonia del sistema',
+        ]);
+
+        Permission::create([
+            'name' => 'Eliminar colonia',
+            'slug' => 'colonies.destroy',
+            'description' => 'Eliminar cualquier colonia del sistema',
         ]);
         
         //EVENTS

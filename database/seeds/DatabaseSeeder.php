@@ -20,6 +20,12 @@ class DatabaseSeeder extends Seeder
         //Creacion de todas las colonias
         $this->call(ColonyTableSeeder::class);
 
+        //Creacion de los privilegios
+        $this->call(PriorityTableSeeder::class);
+
+        //Creacion de las unidades con privilegios
+        $this->call(UnitiesTableSeeder::class);
+
         //Creacion de todas las actividades y unidades ejecutoras
         $this->call(ActivityTableSeeder::class);
 

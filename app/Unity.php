@@ -29,4 +29,9 @@ class Unity extends Model
     {
         return $this->hasMany(Activity::class);
     }
+    
+    public function priority()
+    {
+        return $this->belongsTo(Priority::class);
+    }
 }
