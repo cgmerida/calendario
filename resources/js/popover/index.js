@@ -12,14 +12,13 @@ export default (function() {
     $.fn.popover.Constructor.Default.trigger = 'hover';
     $.fn.popover.Constructor.Default.placement = "top";
     $.fn.popover.Constructor.Default.container = "body";
+    $.fn.popover.Constructor.Default.html = true;
     $.fn.popover.Constructor.Default.template = popTemplate;
     // ------------------------------------------------------
     // @Popover
     // ------------------------------------------------------
 
-    $('[data-toggle="popover"]').popover({
-        template: popTemplate
-    });
+    $('[data-toggle="popover"]').popover();
 
     // ------------------------------------------------------
     // @Tooltips

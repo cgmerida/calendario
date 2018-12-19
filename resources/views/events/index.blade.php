@@ -83,7 +83,7 @@
                 {data: 'start'},
                 {data: 'end'},
                 {data: 'status'},
-                {data: 'actions'}
+                {data: 'actions', orderable: false, searchable: false}
             ]
         });
     </script>

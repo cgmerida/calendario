@@ -96,6 +96,7 @@
 </li>
 @endcan
 
+@can('events.index')
 <li class="nav-item">
     <a class='sidebar-link' href="{{ route('calendar') }}">
         <span class="icon-holder">
@@ -104,3 +105,15 @@
         <span class="title">Calendario</span>
     </a>
 </li>
+@endcan
+
+@can('calendar.show')
+<li class="nav-item">
+    <a class='sidebar-link' href="{{ route('calendar.show') }}">
+        <span class="icon-holder">
+            <i class="c-green-900 ti-calendar"></i>
+        </span>
+        <span class="title">Calendario</span>
+    </a>
+</li>
+@endcan

@@ -40,7 +40,8 @@
 // import './chat';
 // import "./datepicker";
 // import './email';
-import "./utils";
+
+// import "./utils";
 import "./popover";
 import "./scrollbar";
 import "./search";

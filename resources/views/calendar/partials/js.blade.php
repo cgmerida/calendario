@@ -3,9 +3,36 @@
         $("#calendar").fullCalendar({
             themeSystem: 'bootstrap4',
             eventRender: function(eventObj, $el) {
+                content = `
+                ${eventObj.description}
+                <hr>
+                <div class="popover-footer">
+                    @can('events.close')       
+                        <button type="button" class="btn btn-success btn-sm"
+                        data-toggle="modal" data-target="#close-modal" data-id=${eventObj.id}>
+                            <i class="ti-check-box"></i> Cerrar
+                        </button>
+                    @endcan
+                </div>`;
                 $el.popover({
+                    trigger: "manual",
                     title: eventObj.title,
-                    content: eventObj.description
+                    content: content,
+                    animation:false
+                })
+                .on("mouseenter", function () {
+                    var _this = this;
+                    $(this).popover("show");
+                    $(".popover").on("mouseleave", function () {
+                        $(_this).popover('hide');
+                    });
+                }).on("mouseleave", function () {
+                    var _this = this;
+                    setTimeout(function () {
+                        if (!$(".popover:hover").length) {
+                            $(_this).popover("hide");
+                        }
+                    }, 100);
                 });
             },
             events: {
@@ -80,7 +107,12 @@
                 $('#calendar-modal').modal();
             },
             eventDrop: EventUpdate,
-            eventResize: EventUpdate
+            eventResize: EventUpdate,
+            eventDragStart: function () {
+                if ($('.popover').length > 0) {
+                    $('.popover').remove();
+                }
+            }
         });
         
         $("#guardar").click(function(e) {
@@ -118,7 +150,7 @@
                     } else {
                         swal("¡Realizado!", respuesta, "success");
                         $('#calendar').fullCalendar('removeEvents', event.id);
-                        $('#calendar').fullCalendar('renderEvent', event, true);
+                        $('#calendar').fullCalendar('renderEvent', event, false);
                         $('#calendar-modal').modal('hide');
                     }
                 }

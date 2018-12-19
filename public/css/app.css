@@ -80484,6 +80484,10 @@ table.dataTable .sorting_asc:focus {
   padding: 0 20px 0;
 }
 
+.fc-toolbar .fc-center {
+  text-transform: capitalize;
+}
+
 .fc-event-container .fc-event {
   background-color: #0f9aee;
   line-height: 1.4;

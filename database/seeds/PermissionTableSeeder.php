@@ -267,5 +267,13 @@ class PermissionTableSeeder extends Seeder
             'description' => 'Eliminar cualquier evento del sistema',
         ]);
 
+
+        //CALENDAR
+        Permission::create([
+            'name' => 'Calendario de Visualización',
+            'slug' => 'calendar.show',
+            'description' => 'Vista del calendario',
+        ]);
+
     }
 }

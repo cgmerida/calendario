@@ -7,9 +7,20 @@ use Calendario\Event;
 use Calendario\Unity;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Calendario\Contingency;
 
 class CalendarController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:events.index')->only('index', 'calendar');
+        $this->middleware('permission:events.create')->only('store');
+        $this->middleware('permission:events.edit')->only('update');
+        $this->middleware('permission:calendar.show')->only('show');
+        $this->middleware('permission:events.destroy')->only('destroy');
+    }
+
     public function calendar()
     {
         $unities = Unity::pluck('name', 'id')->prepend('Seleccione una unidad', "");
@@ -20,7 +31,20 @@ class CalendarController extends Controller
 
         $colonies = ['' => 'Seleccione zona'];
 
-        return view('calendar.calendar', compact('unities', 'activities', 'zones', 'colonies'));
+        $statuses = [
+            "Pendiente" => "Pendiente",
+            "Agendado" => "Agendado",
+            "Realizado" => "Realizado",
+            "Rechazado" => "Rechazado",
+            "No Realizado" => "No Realizado",
+        ];
+
+        $contingencies = Contingency::all();
+
+        return view('calendar.calendar', compact(
+            'unities', 'activities', 'zones',
+            'colonies', 'statuses', 'contingencies'
+        ));
     }
 
     public function show()
@@ -80,7 +104,7 @@ class CalendarController extends Controller
         }
 
         $event->update($requestData);
-        
+
         $event->activity->unity;
 
         return response()->json([
