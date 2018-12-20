@@ -41,12 +41,19 @@ class Event extends Model
 
     public function getColorAttribute()
     {
-        return $this->activity->unity->priority->color;
+        if ($this->status === 'Pendiente')
+            return $this->activity->unity->priority->color;
+        else 
+            return $this->getColor($this->status);
     }
 
     public function getTextColorAttribute()
     {
-        return $this->activity->unity->priority->textColor;
+        
+        if ($this->status === 'Pendiente')
+            return $this->activity->unity->priority->textColor;
+        else 
+            return '#fff';
     }
 
     public static function rules()
@@ -82,5 +89,31 @@ class Event extends Model
     public function attendance()
     {
         return $this->hasOne(Attendance::class);
+    }
+
+    public function getColor($status)
+    {
+        switch ($status) {
+            
+            case 'Agendado':
+                return '#2196f3';
+                break;
+
+            case 'Realizado':
+                return '#4caf50';
+                break;
+                
+            case 'No Realizado':
+                return '#f44336';
+                break;
+                
+            case 'Rechazado':
+                return '#ff9800';
+                break;
+
+            default:
+                # code...
+                break;
+        }
     }
 }

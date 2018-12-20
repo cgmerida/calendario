@@ -39,12 +39,13 @@
                             'id' => 'close-event',
                         ]) 
                     !!}
+                        <input type="hidden" id="event-close-id">
                         @include('events.partials.close-form')
                     {!! Form::close() !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success" onclick="eventClose(this)">Guardar</button>
+                    <button type="button" class="btn btn-success" onclick="eventClose()">Guardar</button>
                 </div>
             </div>
         </div>

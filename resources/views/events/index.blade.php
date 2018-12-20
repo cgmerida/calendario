@@ -86,5 +86,11 @@
                 {data: 'actions', orderable: false, searchable: false}
             ]
         });
+        
+        $(function() {
+            $('#close-modal').on("show.bs.modal", function (e) {
+                $("#close-event").attr("action", "events/"+ $(e.relatedTarget).data('id') +"/close");
+            });
+        });
     </script>
 @endsection

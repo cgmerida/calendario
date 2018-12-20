@@ -153,7 +153,9 @@ class EventController extends Controller
         
         $event->response = $request->response;
 
-        $event->attendance()->create(['attendance' => $request->attendance]);
+        if($request->attendance && $request->attendance >= 1){
+            $event->attendance()->create(['attendance' => $request->attendance]);
+        }
 
         $event->contingencies()->sync($request->contingencies);
 

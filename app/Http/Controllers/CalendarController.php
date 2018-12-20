@@ -114,6 +114,29 @@ class CalendarController extends Controller
         ]);
     }
 
+    public function close(Request $request, Event $event)
+    {
+        $event->status = $request->status;
+        
+        $event->response = $request->response;
+
+        if($request->attendance && $request->attendance >= 1){
+            $event->attendance()->create(['attendance' => $request->attendance]);
+        }
+
+        $event->contingencies()->sync($request->contingencies);
+
+        $event->save();
+
+        $event->activity->unity;
+        
+        return response()->json([
+            'message' => 'Se ha cerrado correctamente',
+            'event' => $event,
+            'status' => 'ok',
+        ]);
+    }
+
     public function destroy(Event $event)
     {
         $event->delete();

@@ -3,17 +3,23 @@
         $("#calendar").fullCalendar({
             themeSystem: 'bootstrap4',
             eventRender: function(eventObj, $el) {
-                content = `
-                ${eventObj.description}
-                <hr>
-                <div class="popover-footer">
-                    @can('events.close')       
-                        <button type="button" class="btn btn-success btn-sm"
-                        data-toggle="modal" data-target="#close-modal" data-id=${eventObj.id}>
-                            <i class="ti-check-box"></i> Cerrar
-                        </button>
-                    @endcan
-                </div>`;
+                let content;
+                console.log(eventObj.status);
+                if (eventObj.status == 'Pendiente') {
+                    content = `
+                    ${eventObj.description}
+                    <hr>
+                    <div class="popover-footer">
+                        @can('events.close')
+                            <button type="button" class="btn btn-success btn-sm"
+                            data-toggle="modal" data-target="#close-modal" data-id=${eventObj.id}>
+                                <i class="ti-check-box"></i> Cerrar
+                            </button>
+                        @endcan
+                    </div>`;
+                } else {
+                    content = eventObj.description;
+                }
                 $el.popover({
                     trigger: "manual",
                     title: eventObj.title,
@@ -71,7 +77,7 @@
 
                         $('#date').val(date.format('YYYY-MM-DD'));
 
-                        $('.modal-title').text('Crear Evento');
+                        $('#calendar-modal .modal-title').text('Crear Evento');
                         $('#guardar').text('Crear');
                         $('#calendar-modal').modal();
                     } else {
@@ -103,7 +109,7 @@
                 const action = 'calendar/events/' + calEvent.id;
                 fillEventForm(action, 'PUT', calEvent);
                     
-                $('.modal-title').text(titulo);
+                $('#calendar-modal .modal-title').text(titulo);
                 $('#calendar-modal').modal();
             },
             eventDrop: EventUpdate,
@@ -296,6 +302,58 @@
             $('#guardar').show();
             $("#calendar-form :input").prop("disabled", false);
             $('#deletable').empty();
+        });
+    });
+
+    function eventClose() {
+        const form = $('#close-event').closest("form")[0];
+        const event_id = $("#event-close-id").val();
+        console.log(form);
+        swal({
+            title: "¿Estás seguro?",
+            showCancelButton: true,
+            showLoaderOnConfirm: true,
+            confirmButtonText: 'Si, ¡Estoy seguro!',
+            cancelButtonText: 'No, ¡Regresar!',
+            type: 'warning',
+            preConfirm: () => {
+                return fetch(form.action, {
+                    method: 'POST',
+                    credentials: "same-origin",
+                    body: new FormData(form)
+                })
+                .then(response => {
+                    console.log(response);
+                    if (!response.ok) {
+                        throw new Error(response.statusText)
+                    }
+                    return response.json()
+                })
+            },
+            allowOutsideClick: () => !swal.isLoading()
+        }).then(result => {
+            if (result.value) {
+                const respuesta = result.value.message;
+                const event = result.value.event;
+                const status = result.value.status;
+                if(status === 'bad'){
+                    swallError(respuesta);
+                } else {
+                    $('#calendar').fullCalendar('removeEvents', event.id);
+                    $('#calendar').fullCalendar('renderEvent', event, false);
+                    swal("¡Realizado!", respuesta, "success");
+                }
+            }
+        })
+        .catch(error => {
+            swallError(error.message);
+        });
+    }
+    
+    $(function() {
+        $('#close-modal').on("show.bs.modal", function (e) {
+            $("#close-event").attr("action", "calendar/"+ $(e.relatedTarget).data('id') +"/close");
+            $("#event-close-id").val($(e.relatedTarget).data('id'));
         });
     });
 

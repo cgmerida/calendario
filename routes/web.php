@@ -36,4 +36,5 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::get('calendar', 'CalendarController@calendar')->name('calendar');
     Route::get('calendar/show', 'CalendarController@show')->name('calendar.show');
+    Route::post('calendar/{event}/close', 'CalendarController@close')->name('calendar.close');
 });
