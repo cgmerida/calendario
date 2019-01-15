@@ -45,7 +45,7 @@
                     cache: true,
                     error: function(e) {
                         console.log(e);
-                        swallError("Error en la obtención de los eventos!");
+                        swallError(`Error en la obtención de los eventos!<br>Error: ${e.responseText}`);
                     }
                 },
                 header: {
@@ -102,6 +102,10 @@
                 $("#activity_id, #colony_id").html('<option>Seleccione opcion anterior</option>');
             });
         });
+        
+        function swallError(mensaje) {
+            swal("¡Error!", `<small class=text-danger>${mensaje}</small>`, "error");
+        }
     
     </script>
 @endsection
