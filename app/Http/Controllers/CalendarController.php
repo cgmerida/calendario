@@ -14,7 +14,7 @@ class CalendarController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:events.index')->only('index', 'calendar');
+        $this->middleware('permission:events.index')->only('calendar');
         $this->middleware('permission:events.create')->only('store');
         $this->middleware('permission:events.edit')->only('update');
         $this->middleware('permission:calendar.show')->only('show');
