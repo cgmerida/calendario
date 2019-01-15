@@ -9,7 +9,6 @@ export default (function() {
         locale: "es",
         format: "YYYY-MM-DD HH:mm",
         sideBySide: true,
-        useCurrent: false,
-        daysOfWeekDisabled: [1]
+        useCurrent: false
     });
 })();

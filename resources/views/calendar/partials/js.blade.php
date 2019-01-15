@@ -283,8 +283,9 @@
                 if(status === 'bad'){
                     swallError(respuesta);
                 } else {
-                    swal("¡Realizado!", respuesta, "success");
+                    $('#calendar-modal').modal('hide');
                     $('#calendar').fullCalendar('removeEvents', event_id);
+                    swal("¡Realizado!", respuesta, "success");
                 }
             }
         })

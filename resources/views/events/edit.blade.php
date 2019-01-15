@@ -23,9 +23,11 @@
 	<script>
 		$(function(){
 			let currentDate = new Date();
-			currentDate.setDate(currentDate.getDate() + 5);
+			currentDate.setDate(currentDate.getDate() + 15);
+			currentDate.setHours(0,0,0,0);
 			$('#start').datetimepicker({
-				minDate: currentDate
+				minDate: currentDate,
+				defaultDate: currentDate
 			});
 
 			$('#end').datetimepicker({
