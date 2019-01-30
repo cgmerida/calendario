@@ -4,6 +4,7 @@ namespace Calendario\Http\Controllers;
 
 use Calendario\Unity;
 use Illuminate\Http\Request;
+use Calendario\Priority;
 
 class UnityController extends Controller
 {
@@ -34,7 +35,8 @@ class UnityController extends Controller
      */
     public function create()
     {
-        return view('unities.create');
+        $priorities = Priority::pluck('name', 'id');
+        return view('unities.create', compact('priorities'));
     }
 
     /**
@@ -60,7 +62,8 @@ class UnityController extends Controller
      */
     public function show(Unity $unity)
     {
-        return view('unities.show', compact('unity'));
+        $priorities = Priority::pluck('name', 'id');
+        return view('unities.show', compact('unity', 'priorities'));
     }
 
     /**
@@ -71,7 +74,8 @@ class UnityController extends Controller
      */
     public function edit(Unity $unity)
     {
-        return view('unities.edit', compact('unity'));
+        $priorities = Priority::pluck('name', 'id');
+        return view('unities.edit', compact('unity', 'priorities'));
     }
 
     /**

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Unity extends Model
 {
     protected $fillable = [
-        'name',
+        'name', 'priority_id'
     ];
 
     protected $hidden = [
@@ -22,6 +22,7 @@ class Unity extends Model
     {
         return [
             'name' => 'required|string|max:255',
+            'priority_id' => 'required|numeric'
         ];
     }
 
