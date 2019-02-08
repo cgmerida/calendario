@@ -11,6 +11,7 @@ class Event extends Model
 
     protected $fillable = [
         'address', 'description', 'start', 'end',
+        'logistics', 'status',
         'activity_id', 'colony_id', 'user_id',
     ];
 
@@ -24,8 +25,10 @@ class Event extends Model
         'end',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
+    
+    public static $logisticMap = false;
 
     protected $appends = ['title', 'color', 'textColor'];
 
@@ -41,19 +44,20 @@ class Event extends Model
 
     public function getColorAttribute()
     {
-        if ($this->status === 'Pendiente')
-            return $this->activity->unity->priority->color;
-        else 
+        if($this->logisticMap == true)
+            return $this->getLogisticsColor($this->status);
+        else
             return $this->getColor($this->status);
     }
 
     public function getTextColorAttribute()
     {
-        
-        if ($this->status === 'Pendiente')
+        if ($this->status === 'Agendado') {
             return $this->activity->unity->priority->textColor;
-        else 
+        } else {
             return '#fff';
+        }
+
     }
 
     public static function rules()
@@ -63,19 +67,20 @@ class Event extends Model
             'description' => 'required|string|max:255',
             'start' => 'required|date|before:end|after_or_equal:today',
             'end' => 'required|date|after:start',
+            'logistics' => 'boolean',
         ];
     }
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
+
     public function activity()
     {
         return $this->belongsTo(Activity::class);
     }
-    
+
     public function colony()
     {
         return $this->belongsTo(Colony::class);
@@ -85,7 +90,7 @@ class Event extends Model
     {
         return $this->belongsToMany(Contingency::class);
     }
-    
+
     public function attendance()
     {
         return $this->hasOne(Attendance::class);
@@ -94,25 +99,45 @@ class Event extends Model
     public function getColor($status)
     {
         switch ($status) {
-            
             case 'Agendado':
+                return $this->activity->unity->priority->color;
+                break;
+
+            case 'Pendiente':
                 return '#2196f3';
                 break;
 
             case 'Realizado':
                 return '#4caf50';
                 break;
-                
+
             case 'No Realizado':
                 return '#f44336';
                 break;
-                
+
             case 'Rechazado':
                 return '#ff9800';
                 break;
 
             default:
-                # code...
+                return '#ccc';
+                break;
+        }
+    }
+
+    public function getLogisticsColor($status)
+    {
+        switch ($status) {
+            case 'Pendiente':
+                return $this->activity->unity->priority->color;
+                break;
+
+            case 'Rechazado':
+                return '#f44336';
+                break;
+
+            default:
+                return '#4caf50';
                 break;
         }
     }

@@ -22,7 +22,7 @@ class CreateEventsTable extends Migration
             $table->dateTime('start');
             $table->dateTime('end');
             $table->text('response')->nullable();
-            $table->enum('status', ['Pendiente', 'Agendado', 'Realizado', 'Rechazado', 'No Realizado'])->default('Pendiente');
+            $table->enum('status', ['Pendiente', 'Agendado', 'Realizado', 'Rechazado', 'No Realizado'])->default('Agendado');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('colony_id')->references('id')->on('colonies');

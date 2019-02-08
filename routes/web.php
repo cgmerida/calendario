@@ -25,16 +25,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', 'UserController');
     Route::resource('events', 'EventController');
     Route::post('events/{event}/close', 'EventController@close')->name('events.close');
-    
+
     Route::view('admin', 'admin.dashboard.index')->name('admin.dash');
 
     Route::group(['prefix' => 'calendar', 'as' => 'calendar.'], function () {
+        Route::get('/', 'CalendarController@calendar')->name('calendar');
+        Route::get('show', 'CalendarController@show')->name('show');
+        Route::get('logistics', 'CalendarController@logistics')->name('logistics');
+
+        Route::post('{event}/close', 'CalendarController@close')->name('close');
+        Route::post('{event}/schelude', 'CalendarController@schelude')->name('schelude');
+        Route::post('{event}/reject', 'CalendarController@reject')->name('reject');
         Route::resource('events', 'CalendarController', ['except' => [
             'create', 'show', 'edit',
         ]]);
+
         Route::get('events/delete-btn/{event}', 'CalendarController@deleteBtn')->name('delete-btn');
     });
-    Route::get('calendar', 'CalendarController@calendar')->name('calendar');
-    Route::get('calendar/show', 'CalendarController@show')->name('calendar.show');
-    Route::post('calendar/{event}/close', 'CalendarController@close')->name('calendar.close');
 });

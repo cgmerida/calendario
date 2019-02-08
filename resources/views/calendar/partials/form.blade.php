@@ -23,4 +23,6 @@
 
     {!! Form::myInput('time', 'end', 'Hora Finalización') !!}
     
+    {!! Form::myCheckbox('logistics', 'logistics', '¿Requiere logistica?', true, null) !!}
+    
 {!! Form::close() !!}
