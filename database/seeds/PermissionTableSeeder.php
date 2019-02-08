@@ -274,6 +274,13 @@ class PermissionTableSeeder extends Seeder
             'slug' => 'calendar.show',
             'description' => 'Vista del calendario',
         ]);
+        
+        Permission::create([
+            'name' => 'Calendario de Logistica',
+            'slug' => 'calendar.logistics',
+            'description' => 'Vista del calendario',
+        ]);
+        
 
     }
 }

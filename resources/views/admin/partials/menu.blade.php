@@ -117,3 +117,14 @@
     </a>
 </li>
 @endcan
+
+@can('calendar.logistics')
+<li class="nav-item">
+    <a class='sidebar-link' href="{{ route('calendar.logistics') }}">
+        <span class="icon-holder">
+            <i class="c-red-900 ti-calendar"></i>
+        </span>
+        <span class="title">Calendario</span>
+    </a>
+</li>
+@endcan
