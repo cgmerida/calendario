@@ -98,7 +98,7 @@
 
 @can('events.index')
 <li class="nav-item">
-    <a class='sidebar-link' href="{{ route('calendar') }}">
+    <a class='sidebar-link' href="{{ route('calendar.calendar') }}">
         <span class="icon-holder">
             <i class="c-green-500 ti-calendar"></i>
         </span>
