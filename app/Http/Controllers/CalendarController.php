@@ -3,11 +3,11 @@
 namespace Calendario\Http\Controllers;
 
 use Calendario\Colony;
+use Calendario\Contingency;
 use Calendario\Event;
 use Calendario\Unity;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Calendario\Contingency;
 
 class CalendarController extends Controller
 {
@@ -32,10 +32,7 @@ class CalendarController extends Controller
         $colonies = ['' => 'Seleccione zona'];
 
         $statuses = [
-            "Pendiente" => "Pendiente",
-            "Agendado" => "Agendado",
             "Realizado" => "Realizado",
-            "Rechazado" => "Rechazado",
             "No Realizado" => "No Realizado",
         ];
 
@@ -60,30 +57,54 @@ class CalendarController extends Controller
         return view('calendar.show', compact('unities', 'activities', 'zones', 'colonies'));
     }
 
+    public function logistics()
+    {
+        $unities = Unity::pluck('name', 'id')->prepend('Seleccione una unidad', "");
+
+        $activities = ['' => 'Seleccione unidad'];
+
+        $zones = Colony::pluck('zone', 'zone')->prepend('Seleccione una zona', "");
+
+        $colonies = ['' => 'Seleccione zona'];
+
+        return view('calendar.logistics', compact(
+            'unities', 'activities', 'zones', 'colonies'
+        ));
+    }
+
     public function index(Request $request)
     {
         $events = null;
 
         if ($request->start && $request->end) {
             $events = Event::where('start', '>=', $request->start . ' 00:00:00')
-                ->where('end', '<=', $request->end . ' 00:00:00')
-                ->with(['colony', 'activity.unity'])->get();
+                ->where('end', '<=', $request->end . ' 00:00:00');
         } else {
-            $events = Event::with(['colony', 'activity.unity'])->get();
+            $events = Event::select('*');
         }
-        return $events;
+
+        if (isset($request->logistics) && $request->logistics == true) {
+            $events->whereLogistics(true);
+
+            return $events->with(['colony', 'activity.unity'])->get()
+                ->each(function ($event) {
+                    $event->logisticMap = true;
+                });
+        }
+
+        return $events->with(['colony', 'activity.unity'])->get();
     }
 
     public function store(Request $request)
     {
-        $requestData = $request->all();
+        $data = $request->all();
 
-        $validacion = $this->validacion($requestData);
+        $validacion = $this->validacion($data);
         if ($validacion) {
             return $validacion;
         }
 
-        $event = Event::create($requestData);
+        $event = Event::create($data);
 
         $event->activity->unity;
 
@@ -96,14 +117,14 @@ class CalendarController extends Controller
 
     public function update(Request $request, Event $event)
     {
-        $requestData = $request->all();
+        $data = $request->all();
 
-        $validacion = $this->validacion($requestData);
+        $validacion = $this->validacion($data);
         if ($validacion) {
             return $validacion;
         }
 
-        $event->update($requestData);
+        $event->update($data);
 
         $event->activity->unity;
 
@@ -117,10 +138,10 @@ class CalendarController extends Controller
     public function close(Request $request, Event $event)
     {
         $event->status = $request->status;
-        
+
         $event->response = $request->response;
 
-        if($request->attendance && $request->attendance >= 1){
+        if (isset($request->attendance) && $request->attendance >= 1) {
             $event->attendance()->create(['attendance' => $request->attendance]);
         }
 
@@ -129,9 +150,43 @@ class CalendarController extends Controller
         $event->save();
 
         $event->activity->unity;
-        
+
         return response()->json([
             'message' => 'Se ha cerrado correctamente',
+            'event' => $event,
+            'status' => 'ok',
+        ]);
+    }
+
+    public function schelude(Request $request, Event $event)
+    {
+        $event->status = "Agendado";
+
+        $event->save();
+
+        $event->activity->unity;
+
+        $event->logisticMap = true;
+
+        return response()->json([
+            'message' => 'El evento se ha agendado correctamente',
+            'event' => $event,
+            'status' => 'ok',
+        ]);
+    }
+
+    public function reject(Request $request, Event $event)
+    {
+        $event->status = "Rechazado";
+
+        $event->save();
+
+        $event->activity->unity;
+
+        $event->logisticMap = true;
+
+        return response()->json([
+            'message' => 'El evento se ha rechazado correctamente',
             'event' => $event,
             'status' => 'ok',
         ]);
@@ -147,10 +202,10 @@ class CalendarController extends Controller
         ]);
     }
 
-    public function validacion(&$requestData)
+    public function validacion(&$data)
     {
         //valida que tenga hora de inicio y hora de fin
-        if (!$requestData['start'] || !$requestData['end']) {
+        if (!$data['start'] || !$data['end']) {
             return response([
                 'message' => 'Ingrese la hora de inicio y la hora de fin',
                 'status' => 'bad',
@@ -158,16 +213,16 @@ class CalendarController extends Controller
         }
 
         // Concatena la hora de inicio y la hora de fin a el día seleccionado en el calendario
-        $requestData['start'] = date("Y-m-d H:i:s", strtotime($requestData['date']
-            . " " . $requestData['start']));
-        $requestData['end'] = date("Y-m-d H:i:s", strtotime($requestData['date']
-            . " " . $requestData['end']));
+        $data['start'] = date("Y-m-d H:i:s", strtotime($data['date']
+            . " " . $data['start']));
+        $data['end'] = date("Y-m-d H:i:s", strtotime($data['date']
+            . " " . $data['end']));
 
         // Agrega al usuario que modifica o crea el evento
-        $requestData['user_id'] = \Auth::id();
+        $data['user_id'] = \Auth::id();
 
         // Valida toda la data
-        $validator = \Validator::make($requestData, Event::rules());
+        $validator = \Validator::make($data, Event::rules());
 
         $errors = $validator->errors();
         if ($validator->fails()) {
@@ -180,25 +235,31 @@ class CalendarController extends Controller
             ]);
         }
 
-        // Valida que los eventos no se sobre pongan
-        $event_overlap = Event::whereRaw('? between start and end', [$requestData['start']])
-            ->orWhereRaw('? between start and end', [$requestData['end']])->count();
+        // Valida que los eventos no sean creados sino es con 15 días de anticipación.
+        $diff = Carbon::parse(Carbon::now())->diffInDays($data['start']);
 
-        if ($event_overlap == 2) {
+        if ($diff < 14) {
             return response()->json([
-                'message' => 'Solo se pueden atender 2 eventos en el mismo horario.',
+                'message' => 'El evento debe ser creado o modificado con al menos 15 días de anticipación',
                 'status' => 'bad',
             ]);
         }
 
-        // Valida que los eventos no sean creados sino es con 5 días de anticipación.
-        $diff = Carbon::parse(Carbon::now())->diffInDays($requestData['start']);
+        // valida si require logistica la actividad y luego las reglas de logistica.
+        if (isset($data['logistics']) && $data['logistics'] == true) {
+            // Valida que los eventos no se sobre pongan
+            $event_overlap = Event::whereRaw('? between start and end', [$data['start']])
+                ->orWhereRaw('? between start and end', [$data['end']])
+                ->where('logistics', 1)->count();
 
-        if ($diff < 4) {
-            return response()->json([
-                'message' => 'El evento debe ser creado con al menos 5 días de anticipación',
-                'status' => 'bad',
-            ]);
+            if ($event_overlap >= 2) {
+                return response()->json([
+                    'message' => 'Solo se pueden atender 2 eventos en el mismo horario si TIENEN logistica.',
+                    'status' => 'bad',
+                ]);
+            }
+
+            $data['status'] = 'Pendiente';
         }
     }
 
