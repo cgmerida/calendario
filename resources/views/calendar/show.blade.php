@@ -23,7 +23,7 @@
     </div>
 
 
-    <div id="calendar" class="pT-20"></div>
+    <div id="calendar" class="pT-20 mT-nv-40"></div>
 @endsection
  
 @section('js')
@@ -93,6 +93,7 @@
             $('#date').val(event.start.format('DD/MM/YYYY'));
             $('#start').val(event.start.format('HH:mm'));
             $('#end').val(event.end.format('HH:mm'));
+            $('#logistics').prop('checked', event.logistics);
         }
     
         $(document).ready(function() {

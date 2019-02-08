@@ -2,47 +2,9 @@
     $(function(){
         $("#calendar").fullCalendar({
             themeSystem: 'bootstrap4',
-            eventRender: function(eventObj, $el) {
-                let content;
-                console.log(eventObj.status);
-                if (eventObj.status == 'Pendiente') {
-                    content = `
-                    ${eventObj.description}
-                    <hr>
-                    <div class="popover-footer">
-                        @can('events.close')
-                            <button type="button" class="btn btn-success btn-sm"
-                            data-toggle="modal" data-target="#close-modal" data-id=${eventObj.id}>
-                                <i class="ti-check-box"></i> Cerrar
-                            </button>
-                        @endcan
-                    </div>`;
-                } else {
-                    content = eventObj.description;
-                }
-                $el.popover({
-                    trigger: "manual",
-                    title: eventObj.title,
-                    content: content,
-                    animation:false
-                })
-                .on("mouseenter", function () {
-                    var _this = this;
-                    $(this).popover("show");
-                    $(".popover").on("mouseleave", function () {
-                        $(_this).popover('hide');
-                    });
-                }).on("mouseleave", function () {
-                    var _this = this;
-                    setTimeout(function () {
-                        if (!$(".popover:hover").length) {
-                            $(_this).popover("hide");
-                        }
-                    }, 100);
-                });
-            },
+            eventRender: eventPopover,
             events: {
-                url: "calendar/events",
+                url: "{{ route('calendar.events.index') }}",
                 type: "GET",
                 cache: true,
                 error: function(e) {
@@ -193,6 +155,7 @@
         $('#date').val(event.start.format('YYYY-MM-DD'));
         $('#start').val(event.start.format('HH:mm'));
         $('#end').val(event.end.format('HH:mm'));
+        $('#logistics').prop('checked', event.logistics);
     }
 
     function EventUpdate(event, delta, revertFunc) {
@@ -229,7 +192,6 @@
                 },
                 allowOutsideClick: () => !swal.isLoading()
             }).then((result) => {
-                console.log(result);
                 if (result.value) {
                     const respuesta = result.value.message;
                     const status = result.value.status;
@@ -309,7 +271,6 @@
     function eventClose() {
         const form = $('#close-event').closest("form")[0];
         const event_id = $("#event-close-id").val();
-        console.log(form);
         swal({
             title: "¿Estás seguro?",
             showCancelButton: true,
@@ -324,7 +285,6 @@
                     body: new FormData(form)
                 })
                 .then(response => {
-                    console.log(response);
                     if (!response.ok) {
                         throw new Error(response.statusText)
                     }
@@ -357,5 +317,51 @@
             $("#event-close-id").val($(e.relatedTarget).data('id'));
         });
     });
+
+    function eventPopover(eventObj, $el) {
+        let content = `
+        ${eventObj.description}
+        <p>
+            <b>Hora: </b> 
+            ${eventObj.start.format('HH:mm')} a ${eventObj.end.format('HH:mm')}
+        </p>
+        `;
+        
+        if (eventObj.status == 'Agendado') {
+            content += `
+            <hr>
+            <div class="popover-footer">
+                @can('events.close')
+                    <button type="button" class="btn btn-success btn-sm"
+                    data-toggle="modal" data-target="#close-modal" data-id=${eventObj.id}>
+                        <i class="ti-check-box"></i> Cerrar
+                    </button>
+                @endcan
+            </div>`;
+        }
+        $el.popover({
+            trigger: "manual",
+            title: eventObj.title,
+            content: content,
+            animation:false
+        })
+        .on("mouseenter", function () {
+            if ($('.popover').length > 0) {
+                $('.popover').remove();
+            }
+            var _this = this;
+            $(this).popover("show");
+            $(".popover").on("mouseleave", function () {
+                $(_this).popover('hide');
+            });
+        }).on("mouseleave", function () {
+            var _this = this;
+            setTimeout(function () {
+                if (!$(".popover:hover").length) {
+                    $(_this).popover("hide");
+                }
+            }, 100);
+        });
+    }
 
 </script>
