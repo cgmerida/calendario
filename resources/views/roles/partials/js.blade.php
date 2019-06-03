@@ -1,5 +1,3 @@
-
-@section('js')
 <script>
     (function(){
         $('input:radio').click(function(){
@@ -11,4 +9,3 @@
 
     })()
 </script>
-@endsection

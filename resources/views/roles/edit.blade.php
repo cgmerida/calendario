@@ -19,4 +19,6 @@
 	
 @stop
 
-@include('roles.partials.js')
+@section('js')
+	@include('roles.partials.js')
+@endsection
