@@ -30,11 +30,11 @@
             padding-top: 8rem;
             padding-bottom: 8rem;
             background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, .1)), to(rgba(255, 255, 255, .1))),
-            url('{{ asset("/images/arte.jpg") }}');
+            url('{{ asset("/images/bg.jpg") }}');
             background: linear-gradient(90deg,
             rgba(255, 255, 255, .1) 0,
             rgba(255, 255, 255, .1) 100%),
-            url('{{ asset("/images/arte.jpg") }}');
+            url('{{ asset("/images/bg.jpg") }}');
             background-position: center center;
             background-repeat: no-repeat;
             background-size: cover;
