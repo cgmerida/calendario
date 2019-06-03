@@ -28,8 +28,14 @@ $.extend($.fn.dataTable.defaults, {
         { width: 200, targets: -1 }
     ],
     autoWidth: false,
-    buttons: [
-        {
+    buttons: {
+        dom: {
+            button: {
+                tag: 'button',
+                className: ''
+            }
+        },
+        buttons: [{
             extend: "copy",
             text: '<i class="fa fa-clipboard"></i> Copiar',
             className: "btn btn-outline-primary",
@@ -56,9 +62,9 @@ $.extend($.fn.dataTable.defaults, {
         {
             extend: 'colvis',
             text: '<i class="fa fa-eye-slash"></i> Visibilidad',
-            className: "btn btn-outline-primary",
-        }
-    ],
+            className: "btn btn-outline-primary"
+        }]
+    },
     language: {
         url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
         
